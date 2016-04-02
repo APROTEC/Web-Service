@@ -1,0 +1,135 @@
+############### USUARIOS##################
+GET
+login de administradores, retorna toda la informacion del usuario
+/usuarios/loginA/:user_name-:password
+
+login de usuarios normales, retorna toda la informacion del usuario
+
+/usuarios/loginU/:user_name-:password
+
+retorna un usuario
+/usuarios/:codigo_usuario
+
+
+obtiene todos los usuarios
+/usuarios/
+
+
+POST
+inserta nuevo usuario
+/usuarios/:usuario
+tiene que se un json de la forma {'nombre_usuario':'dsdada','contrasena':'c'}
+
+########### GRADOS_ACADEMICOS ###################
+GET
+retorna todos los grados academicos de una persona,incluio nombre
+/grados_academicos_personas/:codigo_informacion_persona
+
+
+retorna todos los grados academicos
+/grados_academicos/
+
+
+DELETE
+
+borra grado academico de una persona
+/grados_academicos_personas/:codigo_informacion_persona-:codigo_grado_academico
+
+
+POST
+inserta grado academico en una persona
+
+/grados_academicos_personas/:codigo_informacion_persona-:codigo_grado_academico
+
+
+########## INFORMACION_PERSONAS ###############
+
+retorna todas las personas que hay en la bd
+/personas/
+
+retorna la persona con el codigo informacion persona
+/personas/:codigo_informacion_persona
+
+
+PUT
+EDITA INFORMACION DE PERSONA
+/personas/{"codigo_informacion_persona":1,"nombre":"David","apellidos":"Obando Paniagua","fecha_nacimiento":"2016-03-30","correo_personal":"Daniel@correo.com","codigo_talla_camisa":"xxl","cargo_jefatura":false,"vegetariano":true,"codigo_sede":2,"codigo_canton":12,"codigo_sub_departamento":13,"cedula":"13793400","correo_institucional":"DanielPanigua@tec.ac.cr","telefono_trabajo":"83285603","numero_extension":"264"}
+
+
+####### CANTONES ############
+GET
+Retorna todos los cantones de una provincia
+/cantones/provincia/:codigo_provincia
+
+Retorna el canton ese codigo de canton
+/cantones/:codigo_canton
+
+
+####### PROVINCIAS ##########
+GET
+Retorna la provincia con el codigo provincia seleccionado
+/provincias/:codigo_provincia
+
+Retorna todas las provincias
+/provincias/
+
+##### SEDES #############
+GET
+Retorna la sede con el codigo de sede seleccionado
+/sedes/:codigo_sede
+
+Retorna todas las sedes
+
+/sedes/
+
+###### SUB DEPARTAMENTOS ########
+GET
+
+Retorna todos los subdepartamentos del departamento ingresado
+
+GET
+
+/sub_departamentos/departamentos/:codigo_departamento
+
+Retorna el sub departamento con el codigo ingresado
+
+/sub_departamentos/:codigo_sub_departamento
+
+
+############ DEPARTAMENTOS ############
+GET
+Retorna el departamento con el codigo departamento ingresado
+
+/departamentos/:codigo_departamento
+
+
+Retorna todos los departamentos
+/departamentos/
+
+
+#### TALLAS CAMISAS #####
+GET
+
+Retorna todas las tallas camisas
+/tallas_camisas/
+
+
+#######EVENTOS##########
+
+POST 
+inserta eventos
+/eventos/{"lugar":"Cartago","fecha_hora":"20120618 10:34:09 AM","numero_maximo_acompanantes":4,"descripcion":"Evento de caridad para los afectados del terremoto","codigo_tipo_evento":1}
+
+PUT actualiza eventos
+
+/eventos/{"codigo_evento":3,lugar":"Cartago","fecha_hora":"20120618 10:34:09 AM","numero_maximo_acompanantes":4,"descripcion":"Evento de caridad para los afectados del terremoto","codigo_tipo_evento":1}
+
+GET
+
+obtener todos los eventos
+/eventos/
+obtener evento
+/eventos/:codigo_evento
+
+
+
