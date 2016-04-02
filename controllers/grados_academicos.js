@@ -8,7 +8,8 @@ exports.getPersonAcademicGrades = function (req, resp, codigo_informacion_person
     var sqlStatement = "select gap.codigo_grado_academico,ga.nivel_especializacion,ga.campo_estudio " +
                         "from grados_academicos_personas gap, grados_academicos ga " +
                         "where gap.codigo_informacion_persona = " + codigo_informacion_persona + " and " +
-                        "gap.codigo_grado_academico = ga.codigo_grado_academico";
+                        "gap.codigo_grado_academico = ga.codigo_grado_academico"+
+                        " order by ga.nivel_especializacion,ga.campo_estudio asc";
     db.executeSql(sqlStatement, function (data, err) {
         if (err) {
             error.displayError(err, resp);
@@ -54,6 +55,24 @@ exports.insertAcademicGradePerson = function (req, resp, codigo_informacion_pers
         }
         else {
             resp.end();
+        }
+    });
+};
+
+exports.getAllAcademicGradesAPersonDoesNotHave = function (req, resp, codigo_informacion_persona) {
+    var sqlStatement = "select * " +
+                        "from Grados_Academicos gp " +
+                        "where not exists(select 'x' " +
+                        "from Grados_Academicos_Personas gap " +
+                        "where gap.codigo_informacion_persona = " + codigo_informacion_persona + " and " +
+                        "gap.codigo_grado_academico = gp.codigo_grado_academico)" +
+                        " order by gp.nivel_especializacion,gp.campo_estudio asc";
+    db.executeSql(sqlStatement, function (data, err) {
+        if (err) {
+            error.displayError(err, resp);
+        }
+        else {
+            queryReturn.displayDataSet(data, resp);
         }
     });
 };

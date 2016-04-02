@@ -25,6 +25,9 @@ GET
 retorna todos los grados academicos de una persona,incluio nombre
 /grados_academicos_personas/:codigo_informacion_persona
 
+retorna todos los grados academicos que no tiene una persona
+/grados_academicos_personas/n/:codigo_informacion_persona
+
 
 retorna todos los grados academicos
 /grados_academicos/

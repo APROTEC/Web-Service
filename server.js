@@ -46,6 +46,10 @@ app.get('/grados_academicos_personas/:codigo_informacion_persona', function (req
     grados_academicos.getPersonAcademicGrades(req, res, req.params.codigo_informacion_persona);
 });
 
+app.get('/grados_academicos_personas/n/:codigo_informacion_persona', function (req, res) {
+    grados_academicos.getAllAcademicGradesAPersonDoesNotHave(req, res, req.params.codigo_informacion_persona);
+});
+
 app.get('/grados_academicos/', function (req, res) {
     grados_academicos.getAllAcademicGrades(req, res);
 });
