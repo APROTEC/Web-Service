@@ -226,7 +226,22 @@ app.put('/usuarios_invitados/:usuario_invitado', function (req, res) {
 app.delete('/usuarios_invitados/:usuario_invitado', function (req, res) {
     usuarios_invitados.delete_invitado(req, res, JSON.parse(req.params.usuario_invitado));
 });
-   
+
+
+app.get('/eventos/invitacion_usuario/:codigo_usuario', function (req, res) {
+    eventos.getUserInvitedEvents(req, res, req.params.codigo_usuario);
+});
+
+app.get('/eventos/confirmacion_usuario/:codigo_usuario', function (req, res) {
+    eventos.getUserConfirmedEvents(req, res, req.params.codigo_usuario);
+});
+
+
+app.get('/eventos/finalizados_usuario/:codigo_usuario', function (req, res) {
+    eventos.getUserFinishedEvents(req, res, req.params.codigo_usuario);
+});
+
+
 
 
 

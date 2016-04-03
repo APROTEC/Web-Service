@@ -103,3 +103,54 @@ exports.inviteGroupToEvent = function (req, resp, codigo_evento, codigo_grupo) {
     });
 
 };
+
+exports.getUserInvitedEvents = function (req, resp, codigo_usuario) {
+    var sqlStatement = 
+                    "select e.* from Eventos e,Usuarios_Invitados ui "+
+                    "where e.codigo_evento = ui.codigo_evento and "+
+                    "ui.codigo_usuario = " + codigo_usuario + " and e.fecha_hora > GETDATE() and " +
+                    "ui.confirmado = 0";
+    console.log(sqlStatement);
+    db.executeSql(sqlStatement, function (data, err) {
+        if (err) {
+            error.displayError(err, resp);
+        }
+        else {
+            queryReturn.displayDataSet(data, resp);
+        }
+    });
+};
+
+
+exports.getUserConfirmedEvents = function (req, resp, codigo_usuario) {
+    var sqlStatement = 
+                    "select e.* from Eventos e,Usuarios_Invitados ui " +
+                    "where e.codigo_evento = ui.codigo_evento and "+
+                    "ui.codigo_usuario = " + codigo_usuario + " and e.fecha_hora > GETDATE() and " +
+                    "ui.confirmado = 1";
+    db.executeSql(sqlStatement, function (data, err) {
+        if (err) {
+            error.displayError(err, resp);
+        }
+        else {
+            queryReturn.displayDataSet(data, resp);
+        }
+    });
+};
+
+exports.getUserFinishedEvents = function (req, resp, codigo_usuario) {
+    var sqlStatement = 
+                    "select e.* from Eventos e,Usuarios_Invitados ui " +
+                    "where e.codigo_evento = ui.codigo_evento and "+
+                    "ui.codigo_usuario = " + codigo_usuario + " and e.fecha_hora < GETDATE() and " +
+                    "ui.confirmado = 1";
+    db.executeSql(sqlStatement, function (data, err) {
+        if (err) {
+            error.displayError(err, resp);
+        }
+        else {
+            queryReturn.displayDataSet(data, resp);
+        }
+    });
+};
+

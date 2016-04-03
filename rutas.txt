@@ -143,6 +143,15 @@ obtener todos los eventos
 obtener evento
 /eventos/:codigo_evento
 
+obtiene invitaciones de un usuario a eventos
+/eventos/invitacion_usuario/:codigo_usuario
+
+obtiene eventos confirmados de un usuario
+/eventos/confirmacion_usuario/:codigo_usuario
+
+obtiene eventos finalizados y confirmados de un usuario
+/eventos/finalizados_usuario/:codigo_usuario
+
 
 ############GRUPOS #############
 GET
