@@ -152,15 +152,29 @@ da todos los grupos
 da un grupo
 /grupos/:codigo_grupo
 
+extrae toda la informacion de los usuarios en un grupo
+/miembros_grupos/:codigo_grupo
+
+
 PUT
 
 actualiza grupo
 /grupos/{"codigo_grupo":1,"descripcion_grupo":"Todos"}
 
 delete
+elimina un grupo
 /grupos/:codigo_grupo
+
+elimina a un miembro del grupo
+
+/miembros_grupo/:codigo_grupo-:codigo_usuario
 
 post
 crea grupo
 
 /grupos/{"descripcion_grupo":"Grupo prueba"}
+
+mete usuarios a un grupo
+
+/miembros_grupo/:codigo_grupo-:codigo_usuario
+
