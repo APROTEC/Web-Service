@@ -13,6 +13,7 @@ var sub_departamentos = require('./controllers/sub_departamentos')
 var departamentos = require('./controllers/departamentos')
 var tallas_camisas = require('./controllers/tallas_camisas.js')
 var eventos = require('./controllers/eventos.js')
+var grupos = require('./controllers/grupos.js');
 
 
 app.use(function (req, res, next) {
@@ -26,6 +27,7 @@ app.use(function (req, res, next) {
 app.get('/usuarios/loginA/:user_name-:password', function (req, res) {
 	usuarios.loginAsAdmin(req, res, req.params.user_name, req.params.password);
 });
+
 
 app.post('/usuarios/:usuario', function (req, res) {
     usuarios.insertNewUser(req, res, JSON.parse(req.params.usuario));
@@ -128,12 +130,55 @@ app.get('/eventos/:codigo_evento', function (req, res) {
     eventos.getEvento(req, res,req.params.codigo_evento);
 });
 
+app.post('/eventos/invitarUsuario/:codigo_evento-:codigo_usuario', function (req, res) {
+    eventos.inviteUserToEvent(req, res,req.params.codigo_evento,req.params.codigo_usuario);
+});
+
+app.post('/eventos/invitarGrupo/:codigo_evento-:codigo_grupo', function (req, res) {
+    eventos.inviteGroupToEvent(req, res,req.params.codigo_evento,req.params.codigo_grupo);
+});
+
 app.put('/eventos/:evento', function (req, res) {
     eventos.updateEvento(req, res, JSON.parse(req.params.evento));
 });
 
 app.post('/eventos/:evento', function (req, res) {
     eventos.insertEvento(req, res, JSON.parse(req.params.evento));
+});
+
+
+app.get('/grupos', function (req, res) {
+    grupos.getAllGrupos(req, res);
+});
+
+
+app.get('/grupos/:codigo_grupo', function (req, res) {
+    grupos.getGrupo(req, res,req.params.codigo_grupo);
+});
+
+
+app.put('/grupos/:grupo', function (req, res) {
+    grupos.actualizarGrupos(req, res, JSON.parse(req.params.grupo));
+});
+
+app.post('/grupos/:grupo', function (req, res) {
+    grupos.crearGrupo(req, res, JSON.parse(req.params.grupo));
+});
+
+app.delete('/grupos/:codigo_grupo', function (req, res) {
+    grupos.eliminarGrupo(req, res, req.params.codigo_grupo);
+});
+
+app.post('/miembros_grupo/:codigo_grupo-:codigo_usuario', function (req, res) {
+    grupos.anadirMiembroAGrupo(req, resp, req.params.codigo_grupo, req.params.codigo_usuario);
+}); 
+
+app.delete('/miembros_grupo/:codigo_grupo-:codigo_usuario', function (req, res) {
+    grupos.borrarMiembroDeGrupo(req, resp, req.params.codigo_grupo, req.params.codigo_usuario);
+});
+
+app.get('/miembros_grupos/:codigo_grupo', function (req, resp) {
+    grupos.extraerInformacionGrupo(req,resp,req.params.codigo_grupo);
 });
 
 

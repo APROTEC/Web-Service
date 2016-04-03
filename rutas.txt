@@ -144,4 +144,23 @@ obtener evento
 /eventos/:codigo_evento
 
 
+############GRUPOS #############
+GET
+da todos los grupos
+/grupos
 
+da un grupo
+/grupos/:codigo_grupo
+
+PUT
+
+actualiza grupo
+/grupos/{"codigo_grupo":1,"descripcion_grupo":"Todos"}
+
+delete
+/grupos/:codigo_grupo
+
+post
+crea grupo
+
+/grupos/{"descripcion_grupo":"Grupo prueba"}
