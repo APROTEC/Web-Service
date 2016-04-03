@@ -74,3 +74,32 @@ exports.deleteUsuario = function (req, resp, codigo_evento) {
     });
 
 };
+
+exports.inviteUserToEvent = function (req, resp, codigo_evento, codigo_usuario) {
+    var sqlStatement = "insert into usuarios_invitados(codigo_evento,codigo_usuario,confirmado) values " +
+                       "(" + codigo_evento + "," + codigo_usuario + ",0)";
+    db.executeSql(sqlStatement, function (data, err) {
+        if (err) {
+            error.displayError(err, resp);
+        }
+        else {
+            resp.end();
+        }
+    });
+
+};
+
+exports.inviteGroupToEvent = function (req, resp, codigo_evento, codigo_grupo) {
+    var sqlStatement = "insert into usuarios_invitados (codigo_evento,codigo_usuario,confirmado) " +
+                        "select " + codigo_evento + ", codigo_usuario,0 from miembros_grupo where " +
+                        "codigo_grupo = " + codigo_grupo;
+    db.executeSql(sqlStatement, function (data, err) {
+        if (err) {
+            error.displayError(err, resp);
+        }
+        else {
+            resp.end();
+        }
+    });
+
+};

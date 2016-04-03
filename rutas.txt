@@ -123,6 +123,15 @@ POST
 inserta eventos
 /eventos/{"lugar":"Cartago","fecha_hora":"20120618 10:34:09 AM","numero_maximo_acompanantes":4,"descripcion":"Evento de caridad para los afectados del terremoto","codigo_tipo_evento":1}
 
+Invita usuario a evento
+
+/eventos/invitarUsuario/:codigo_evento-:codigo_usuario
+
+invita grupo a evento
+/eventos/invitarGrupo/:codigo_evento-:codigo_grupo
+
+
+
 PUT actualiza eventos
 
 /eventos/{"codigo_evento":3,lugar":"Cartago","fecha_hora":"20120618 10:34:09 AM","numero_maximo_acompanantes":4,"descripcion":"Evento de caridad para los afectados del terremoto","codigo_tipo_evento":1}
