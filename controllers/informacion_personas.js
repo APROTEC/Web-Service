@@ -4,10 +4,10 @@ var queryReturn = require("./queryReturn.js")
 
 
 exports.getAllPeopleGeneralInformation = function (req, resp) {
-    var sqlStatement = "select codigo_informacion_persona, nombre,apellidos,fecha_nacimiento, " +
+    var sqlStatement = "select codigo_informacion_persona,nombre,apellidos,fecha_nacimiento, " +
                         "correo_personal, codigo_talla_camisa, cargo_jefatura, " +
                         "vegetariano,codigo_sede,codigo_canton,codigo_sub_departamento,cedula," +
-                        "correo_institucional,telefono_trabajo,numero_extension " +
+                        "correo_institucional,telefono_trabajo,numero_extension "+
                         "from informacion_personas " +
                         'order by nombre,apellidos asc';
     db.executeSql(sqlStatement, function (data, err) {
