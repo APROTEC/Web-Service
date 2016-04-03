@@ -241,6 +241,14 @@ app.get('/eventos/finalizados_usuario/:codigo_usuario', function (req, res) {
     eventos.getUserFinishedEvents(req, res, req.params.codigo_usuario);
 });
 
+app.get('/eventos/lista_invitados/:codigo_evento', function (req, res) {
+    eventos.getInvitedUsersToEvent(req, res, req.params.codigo_evento);
+});
+
+app.get('/eventos/lista_confirmados/:codigo_evento', function (req, res) {
+    eventos.getConfirmedUsersToEvent(req, res, req.params.codigo_evento);
+});
+
 
 
 

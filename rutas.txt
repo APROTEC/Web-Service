@@ -152,6 +152,11 @@ obtiene eventos confirmados de un usuario
 obtiene eventos finalizados y confirmados de un usuario
 /eventos/finalizados_usuario/:codigo_usuario
 
+obtiene lista de confirmados a un evento
+/eventos/lista_confirmados/:codigo_evento
+obtiene lista de usuarios invitados
+/eventos/lista_invitados/:codigo_evento
+
 
 ############GRUPOS #############
 GET

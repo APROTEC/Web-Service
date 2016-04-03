@@ -152,5 +152,47 @@ exports.getUserFinishedEvents = function (req, resp, codigo_usuario) {
             queryReturn.displayDataSet(data, resp);
         }
     });
+
+    
+};
+
+exports.getInvitedUsersToEvent = function (req, resp, codigo_evento) {
+    var sqlStatement = "select u.codigo_usuario, "+ 
+                        "p.codigo_informacion_persona, p.nombre, p.apellidos, p.fecha_nacimiento, "+
+                        "p.correo_personal, p.codigo_talla_camisa, p.cargo_jefatura, "+
+                        "p.vegetariano, p.codigo_sede, p.codigo_canton, p.codigo_sub_departamento, p.cedula, "+
+                        "p.correo_institucional, p.telefono_trabajo, p.numero_extension "+
+                        "from usuarios_invitados ui, usuarios u, informacion_personas p "+
+                        "where ui.codigo_evento ="+codigo_evento+" and ui.confirmado = 0 and "+
+                        "ui.codigo_usuario = u.codigo_usuario and u.codigo_informacion_persona = p.codigo_informacion_persona ";
+    db.executeSql(sqlStatement, function (data, err) {
+        if (err) {
+            error.displayError(err, resp);
+        }
+        else {
+            queryReturn.displayDataSet(data, resp);
+        }
+    });
+
+};
+
+exports.getConfirmedUsersToEvent = function (req, resp, codigo_evento) {
+    var sqlStatement = "select u.codigo_usuario, " + 
+                        "p.codigo_informacion_persona, p.nombre, p.apellidos, p.fecha_nacimiento, " +
+                        "p.correo_personal, p.codigo_talla_camisa, p.cargo_jefatura, " +
+                        "p.vegetariano, p.codigo_sede, p.codigo_canton, p.codigo_sub_departamento, p.cedula, " +
+                        "p.correo_institucional, p.telefono_trabajo, p.numero_extension "+
+    "from usuarios_invitados ui, usuarios u, informacion_personas p "+
+    "where ui.codigo_evento =" + codigo_evento + " and ui.confirmado = 1 and " +
+                        "ui.codigo_usuario = u.codigo_usuario and u.codigo_informacion_persona = p.codigo_informacion_persona ";
+    db.executeSql(sqlStatement, function (data, err) {
+        if (err) {
+            error.displayError(err, resp);
+        }
+        else {
+            queryReturn.displayDataSet(data, resp);
+        }
+    });
+
 };
 
