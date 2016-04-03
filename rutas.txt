@@ -134,7 +134,7 @@ invita grupo a evento
 
 PUT actualiza eventos
 
-/eventos/{"codigo_evento":3,lugar":"Cartago","fecha_hora":"20120618 10:34:09 AM","numero_maximo_acompanantes":4,"descripcion":"Evento de caridad para los afectados del terremoto","codigo_tipo_evento":1}
+/eventos/{"nombre": "Evento de Caridad","codigo_evento":3,lugar":"Cartago","fecha_hora":"20120618 10:34:09 AM","numero_maximo_acompanantes":4,"descripcion":"Evento de caridad para los afectados del terremoto","codigo_tipo_evento":1}
 
 GET
 
