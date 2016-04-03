@@ -178,3 +178,22 @@ mete usuarios a un grupo
 
 /miembros_grupo/:codigo_grupo-:codigo_usuario
 
+
+###########tipos eventos ##############
+
+get
+consigue todos los tipos de eventos
+/tipos_eventos
+
+consigue un tipo de evento
+/tipos_eventos/:codigo_tipo_evento
+
+post
+crea un tipo evento
+/tipos_eventos/{"descripcion":"Cena"}
+
+put
+actualiza un tipo de evento
+/tipos_eventos/{"codigo_tipo_evento":4,"descripcion":"Cena"}
+
+

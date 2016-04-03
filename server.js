@@ -14,6 +14,7 @@ var departamentos = require('./controllers/departamentos')
 var tallas_camisas = require('./controllers/tallas_camisas.js')
 var eventos = require('./controllers/eventos.js')
 var grupos = require('./controllers/grupos.js');
+var tipos_eventos = require('./controllers/tipos_eventos.js');
 
 
 app.use(function (req, res, next) {
@@ -170,16 +171,34 @@ app.delete('/grupos/:codigo_grupo', function (req, res) {
 });
 
 app.post('/miembros_grupo/:codigo_grupo-:codigo_usuario', function (req, res) {
-    grupos.anadirMiembroAGrupo(req, resp, req.params.codigo_grupo, req.params.codigo_usuario);
+    grupos.anadirMiembroAGrupo(req, res, req.params.codigo_grupo, req.params.codigo_usuario);
 }); 
 
 app.delete('/miembros_grupo/:codigo_grupo-:codigo_usuario', function (req, res) {
-    grupos.borrarMiembroDeGrupo(req, resp, req.params.codigo_grupo, req.params.codigo_usuario);
+    grupos.borrarMiembroDeGrupo(req, res, req.params.codigo_grupo, req.params.codigo_usuario);
 });
 
-app.get('/miembros_grupos/:codigo_grupo', function (req, resp) {
-    grupos.extraerInformacionGrupo(req,resp,req.params.codigo_grupo);
+app.get('/miembros_grupos/:codigo_grupo', function (req, res) {
+    grupos.extraerInformacionGrupo(req,res,req.params.codigo_grupo);
 });
+
+app.get('/tipos_eventos/', function (req, res) {
+    tipos_eventos.getAllTiposEventos(req, res);
+});
+
+app.get('/tipos_eventos/:codigo_tipo_evento', function (req, res) {
+    tipos_eventos.getTipoEvento(req, res,req.params.codigo_tipo_evento);
+});
+
+app.post('/tipos_eventos/:tipo_evento', function (req, res) {
+    tipos_eventos.crearTipoEvento(req, res, JSON.parse(req.params.tipo_evento));
+});
+   
+
+app.put('/tipos_eventos/:tipo_evento', function (req, res) {
+    tipos_eventos.actualizarTipoEvento(req, res, JSON.parse(req.params.tipo_evento));
+});
+   
 
 
 
