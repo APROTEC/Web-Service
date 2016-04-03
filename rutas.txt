@@ -197,3 +197,36 @@ actualiza un tipo de evento
 /tipos_eventos/{"codigo_tipo_evento":4,"descripcion":"Cena"}
 
 
+
+####### Opciones acompanantes ########
+
+get
+consigue todos las opciones_acompanantes
+/opciones_acompanantes/
+
+consigue una opcion acompanante
+/opciones_acompanantes/:codigo_opcion_acompanante
+
+
+post
+/opciones_acompanantes/{"descripcion":"Adultos"}
+
+
+put
+/opciones_acompanantes/{"codigo_opcion_acompanante":1,descripcion":"Entrada general"}
+
+
+########usuarios_invitados######################
+
+
+put
+actualiza informacion de un usuario_invitado
+
+http://localhost:8081/usuarios_invitados/{"codigo_evento":4,"codigo_usuario":1,"confirmado":1,"precio_entradas":50}
+
+delete
+borra usuario_invitado
+http://localhost:8081/usuarios_invitados/{"codigo_evento":4,"codigo_usuario":1}
+
+
+

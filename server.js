@@ -15,6 +15,8 @@ var tallas_camisas = require('./controllers/tallas_camisas.js')
 var eventos = require('./controllers/eventos.js')
 var grupos = require('./controllers/grupos.js');
 var tipos_eventos = require('./controllers/tipos_eventos.js');
+var opciones_acompanantes = require('./controllers/opcion_acompanantes.js')
+var usuarios_invitados = require('./controllers/usuarios_invitados.js')
 
 
 app.use(function (req, res, next) {
@@ -197,6 +199,32 @@ app.post('/tipos_eventos/:tipo_evento', function (req, res) {
 
 app.put('/tipos_eventos/:tipo_evento', function (req, res) {
     tipos_eventos.actualizarTipoEvento(req, res, JSON.parse(req.params.tipo_evento));
+});
+
+app.get('/opciones_acompanantes/', function (req, res) {
+    opciones_acompanantes.getAllOpcionesAcompanantes(req, res);
+
+});
+
+app.get('/opciones_acompanantes/:codigo_opcion_acompanante', function (req, res) {
+    opciones_acompanantes.getOpcionAcompanante(req, res,req.params.codigo_opcion_acompanante);
+
+});
+
+app.post('/opciones_acompanantes/:opcion_acompanante', function (req, res) {
+    opciones_acompanantes.insertOpcionAcompanante(req, res, JSON.parse(req.params.opcion_acompanante));
+});
+
+app.put('/opciones_acompanantes/:opcion_acompanante', function (req, res) {
+    opciones_acompanantes.actualizarOpcionAcompanante(req, res, JSON.parse(req.params.opcion_acompanante));
+});
+
+app.put('/usuarios_invitados/:usuario_invitado', function (req, res) {
+    usuarios_invitados.updateUsuario_Invitado(req, res, JSON.parse(req.params.usuario_invitado));
+});
+
+app.delete('/usuarios_invitados/:usuario_invitado', function (req, res) {
+    usuarios_invitados.delete_invitado(req, res, JSON.parse(req.params.usuario_invitado));
 });
    
 
