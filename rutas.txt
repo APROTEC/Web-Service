@@ -18,7 +18,7 @@ obtiene todos los usuarios
 POST
 inserta nuevo usuario
 /usuarios/:usuario
-tiene que se un json de la forma {'nombre_usuario':'dsdada','contrasena':'c'}
+tiene que se un json de la forma {'nombre_usuario':'dsdada','contrasena':'c','nombre':'Esteban','apellidos':'Carmona'}
 
 ########### GRADOS_ACADEMICOS ###################
 GET
