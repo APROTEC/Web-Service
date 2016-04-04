@@ -73,7 +73,7 @@ exports.getPersonInformation = function (req,resp,codigo_informacion_persona) {
 };
 
 exports.insertNewPerson = function (req, resp,user) {
-    var sqlStatement = "insert into informacion_personas (codigo_informacion_persona,nombre,apellidos) values (ident_current('usuarios')+1,'"+user.nombre+"','"+user.apellidos+"')";
+    var sqlStatement = "insert into informacion_personas (codigo_informacion_persona) values (ident_current('usuarios')+1)";
     db.executeSql(sqlStatement, function (data, err) {
         if (err) {
             error.displayError(err, resp);
