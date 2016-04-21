@@ -84,5 +84,17 @@ exports.insertNewUser = function (req, resp, usuario) {
     
 
 };
+exports.changePassword = function (req, resp,codigo_usuario,password) {
+    var sqlStatement = "update usuarios set contrasena = '" + password + "' where codigo_usuario = " + codigo_usuario;
+    db.executeSql(sqlStatement, function (data, err) {
+        if (err) {
+            error.displayError(err, resp);
+        }
+        else {
+            queryReturn.displayDataSet(1, resp);
+        }
+    });
 
+
+};
 

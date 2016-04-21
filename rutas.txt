@@ -20,6 +20,12 @@ inserta nuevo usuario
 /usuarios/:usuario
 tiene que se un json de la forma {'nombre_usuario':'dsdada','contrasena':'c'}
 
+
+put
+
+cambia contrasena
+/usuarios/cambiar_contrasena/:codigo_usuario-:nueva_contrasena
+
 ########### GRADOS_ACADEMICOS ###################
 GET
 retorna todos los grados academicos de una persona,incluio nombre

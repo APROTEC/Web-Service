@@ -40,6 +40,10 @@ app.get('/usuarios/loginU/:user_name-:password', function (req, res) {
     usuarios.loginAsUser(req, res, req.params.user_name, req.params.password);
 });
 
+app.put('/usuarios/cambiar_contrasena/:codigo_usuario-:password', function (req, res) {
+    usuarios.changePassword(req, res, req.params.codigo_usuario, req.params.password);
+});
+
 app.get('/usuarios/:codigo_usuario', function (req, res) {
     usuarios.getUser(req, res, req.params.codigo_usuario);
 });
