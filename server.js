@@ -17,6 +17,8 @@ var grupos = require('./controllers/grupos.js');
 var tipos_eventos = require('./controllers/tipos_eventos.js');
 var opciones_acompanantes = require('./controllers/opcion_acompanantes.js')
 var usuarios_invitados = require('./controllers/usuarios_invitados.js')
+var documentos = require('./controllers/documentos.js')
+var documentos_usuarios = require('./controllers/actas_usuarios.js')
 
 
 app.use(function (req, res, next) {
@@ -26,6 +28,48 @@ app.use(function (req, res, next) {
     next();
 });
 
+
+
+app.get('/actas_usuarios/usuario/:codigo_usuario', function (req, res) {
+    documentos_usuarios.getUserDocuments(req, res, req.params.codigo_usuario);
+});
+
+app.get('/actas_usuarios/actas/:codigo_acta', function (req, res) {
+    documentos_usuarios.getDocumentInvitations(req, res, req.params.codigo_acta);
+});
+
+app.post('/actas_usuarios/usuario/:codigo_acta-:codigo_usuario', function (req, res) { 
+    documentos_usuarios.insertUser(req, res,req.params.codigo_acta, req.params.codigo_usuario);
+});
+
+app.post('/actas_usuarios/grupo/:codigo_acta-:codigo_grupo', function (req, res) { 
+    documentos_usuarios.insertGroupIntoDocument(req, res, req.params.codigo_acta, req.params.codigo_grupo);
+});
+
+app.delete('/actas_usuarios/:codigo_acta-:codigo_usuario', function (req, res) {
+    documentos_usuarios.deleteUserDocument(req, res, req.params.codigo_acta, req.params.codigo_usuario);
+});
+
+
+app.post('/actas/:acta', function (req, res) {
+    documentos.loadDocument(req, res, JSON.parse(req.params.acta));
+    
+});
+
+
+app.get('/actas/', function (req, res) {
+    documentos.getDocuments(req, res);
+});
+
+
+app.get('/actas/:codigo_acta', function (req, res) {
+    documentos.getDocument(req, res,req.params.codigo_acta);
+});
+
+
+app.delete("/actas/:codigo_acta", function (req, res) {
+    documentos.deleteDocument(req, res, req.params.codigo_acta);
+});
 
 app.get('/usuarios/loginA/:user_name-:password', function (req, res) {
 	usuarios.loginAsAdmin(req, res, req.params.user_name, req.params.password);

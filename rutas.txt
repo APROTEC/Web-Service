@@ -250,3 +250,68 @@ http://localhost:8081/usuarios_invitados/{"codigo_evento":4,"codigo_usuario":1}
 
 
 
+##########actas###################################
+
+
+get 
+
+obtiene todas las actas
+
+/actas/
+
+obtiene un acta 
+
+/actas/:codigo_acta
+
+
+obtiene todas las actas de un usuario
+
+/actas_usuarios/usuario/:codigo_usuario
+
+obtiene todas los usuarios relacionados a un acta
+
+/actas_usuarios/actas/:codigo_acta
+
+
+post 
+
+relaciona un usuario con un acta
+
+/actas_usuarios/usuario/:codigo_acta-:codigo_usuario
+
+relaciona un grupo con un acta
+
+/actas_usuarios/grupo/:codigo_acta-:codigo_grupo
+
+
+delete 
+
+elimina una relacion de usuario acta
+
+/actas_usuarios/:codigo_acta-:codigo_usuario
+
+elimina una acta
+
+/actas/:codigo_acta
+
+
+post
+
+sube un acta
+/actas/:acta
+ejemplo: /acta/{"nombre_acta":"ejemplo","descripcion_acta":"prueba"}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
