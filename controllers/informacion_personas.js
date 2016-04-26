@@ -37,7 +37,6 @@ exports.updateInformation = function (req, resp, info_data) {
                         ",telefono_trabajo = '" + info_data.telefono_trabajo + "' " +
                         ",numero_extension = '" + info_data.numero_extension + "' " +
                         "where codigo_informacion_persona = " + info_data.codigo_informacion_persona + " ";
-    console.log(sqlStatement);
     db.executeSql(sqlStatement, function (data, err) {
         if (err) {
             error.displayError(err, resp);

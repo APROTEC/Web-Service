@@ -19,6 +19,10 @@ var opciones_acompanantes = require('./controllers/opcion_acompanantes.js')
 var usuarios_invitados = require('./controllers/usuarios_invitados.js')
 var documentos = require('./controllers/documentos.js')
 var documentos_usuarios = require('./controllers/actas_usuarios.js')
+var passwordRetriever = require('./controllers/RecuperadorDeContrasenas.js');
+
+
+
 
 
 app.use(function (req, res, next) {
@@ -275,6 +279,10 @@ app.delete('/usuarios_invitados/:usuario_invitado', function (req, res) {
     usuarios_invitados.delete_invitado(req, res, JSON.parse(req.params.usuario_invitado));
 });
 
+app.get('/usuario_valido/:username', function (req, res) {
+    usuarios.getUsuarioValido(req, res, req.params.username);
+});
+
 
 app.get('/eventos/invitacion_usuario/:codigo_usuario', function (req, res) {
     eventos.getUserInvitedEvents(req, res, req.params.codigo_usuario);
@@ -295,6 +303,10 @@ app.get('/eventos/lista_invitados/:codigo_evento', function (req, res) {
 
 app.get('/eventos/lista_confirmados/:codigo_evento', function (req, res) {
     eventos.getConfirmedUsersToEvent(req, res, req.params.codigo_evento);
+});
+
+app.post('/usuarios/recuperar_contrasena/:nombre_usuario', function (req, res) {
+    passwordRetriever.enviarPassword(req, res, req.params.nombre_usuario);
 });
 
 

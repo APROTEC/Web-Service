@@ -23,6 +23,26 @@ exports.loginAsAdmin = function (req, resp, email, password) {
 };
 
 
+exports.getUsuarioValido = function (req, res, username) {
+    var sqlStatement = "select * from usuarios where nombre_usuario =  '" + username+"'";
+    db.executeSql(sqlStatement, function (data, err) {
+        if (err) {
+            error.displayError(err, resp);
+        }
+        else {
+            
+            if (data.length ==0) {
+                queryReturn.displayDataSet(0, res);
+                return;
+            }
+            queryReturn.displayDataSet(1, res);
+        }
+    });
+
+
+};
+
+
 
 exports.loginAsUser = function (req, resp, email, password) {
     var sqlStament = "select codigo_usuario,nombre_usuario,codigo_tipo_usuario,codigo_informacion_persona,fecha_ingreso,fecha_salida  " +
