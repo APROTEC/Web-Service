@@ -36,7 +36,7 @@ exports.crearTipoEvento = function (req, resp, tipo_evento) {
             error.displayError(err, resp);
         }
         else {
-            resp.end();
+            queryReturn.displayDataSet(1, resp);
         }
     });
 };
@@ -49,7 +49,7 @@ exports.actualizarTipoEvento = function (req, resp, tipo_evento) {
             error.displayError(err, resp);
         }
         else {
-            resp.end();
+            queryReturn.displayDataSet(1, resp);
         }
     });
 };

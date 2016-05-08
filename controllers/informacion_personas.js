@@ -42,7 +42,7 @@ exports.updateInformation = function (req, resp, info_data) {
             error.displayError(err, resp);
         }
         else {
-            resp.end();
+            queryReturn.displayDataSet(1, resp);
         }
     });
 
@@ -53,7 +53,7 @@ exports.updateInformation = function (req, resp, info_data) {
 
 
 exports.getPersonInformation = function (req,resp,codigo_informacion_persona) {
-    var sqlStatement = "select nombre,apellidos,fecha_nacimiento, " +
+    var sqlStatement = "select nombre,foto,apellidos,fecha_nacimiento, " +
                         "correo_personal, codigo_talla_camisa, cargo_jefatura, " +
                         "vegetariano,codigo_sede,codigo_canton,codigo_sub_departamento,cedula," +
                         "correo_institucional,telefono_trabajo,numero_extension " +
@@ -72,13 +72,12 @@ exports.getPersonInformation = function (req,resp,codigo_informacion_persona) {
 };
 
 exports.insertNewPerson = function (req, resp,user) {
-    var sqlStatement = "insert into informacion_personas (codigo_informacion_persona,nombre,apellidos) values (ident_current('usuarios')+1,'"+user.nombre+"','"+user.apellidos+"')";
+    var sqlStatement = "insert into informacion_personas (codigo_informacion_persona,nombre,apellidos,correo_personal,cedula,foto) values (ident_current('usuarios')+1,'"+user.nombre+"','"+user.apellidos+"','"+user.nombre_usuario+"','" + user.cedula + "','aprotecstorage.blob.core.windows.net/photos/f3.png')";
     db.executeSql(sqlStatement, function (data, err) {
         if (err) {
             error.displayError(err, resp);
         }
         else {
-            resp.end();
             exports.insertNewUser(req, resp, user);
             
 
@@ -95,7 +94,7 @@ exports.insertNewUser = function (req, resp, user) {
             error.displayError(err, resp);
         }
         else {
-            resp.end();
+            queryReturn.displayDataSet(1, resp);
         }
     });
 

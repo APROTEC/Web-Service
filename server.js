@@ -20,6 +20,8 @@ var usuarios_invitados = require('./controllers/usuarios_invitados.js')
 var documentos = require('./controllers/documentos.js')
 var documentos_usuarios = require('./controllers/actas_usuarios.js')
 var passwordRetriever = require('./controllers/RecuperadorDeContrasenas.js');
+var photos = require('./controllers/fotos.js');
+var emailManager = require('./controllers/emaIlManager.js');
 
 
 
@@ -28,7 +30,7 @@ var passwordRetriever = require('./controllers/RecuperadorDeContrasenas.js');
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    res.header("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE");
+    res.header("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
     next();
 });
 
@@ -82,6 +84,10 @@ app.get('/usuarios/loginA/:user_name-:password', function (req, res) {
 
 app.post('/usuarios/:usuario', function (req, res) {
     usuarios.insertNewUser(req, res, JSON.parse(req.params.usuario));
+});
+
+app.delete('/usuarios/:usuario', function (req, res) {
+    usuarios.deleteUser(req, res, req.params.usuario);
 });
 
 app.get('/usuarios/loginU/:user_name-:password', function (req, res) {
@@ -308,6 +314,18 @@ app.get('/eventos/lista_confirmados/:codigo_evento', function (req, res) {
 app.post('/usuarios/recuperar_contrasena/:nombre_usuario', function (req, res) {
     passwordRetriever.enviarPassword(req, res, req.params.nombre_usuario);
 });
+
+app.post('/photos/:codigo_informacion_persona', function (req, res) {
+    photos.loadPhoto(req, res, req.params.codigo_informacion_persona);
+});
+
+
+app.post('/email/:asunto/:destinatarios/:texto', function (req, res) {
+    emailManager.sendMails(req, res, req.params.asunto, req.params.destinatarios, req.params.texto);
+
+});
+
+
 
 
 

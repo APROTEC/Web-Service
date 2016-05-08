@@ -23,7 +23,8 @@ getActualPassword = function (req,res,username) {
             error.displayError(err, resp);
         }
         else {
-            sendPassword(req, res, username,data[0].contrasena);
+            sendPassword(req, res, username, data[0].contrasena);
+
         }
     });
 

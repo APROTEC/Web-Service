@@ -33,7 +33,7 @@ exports.insertOpcionAcompanante = function (req, resp, opcion_acompanante) {
             error.displayError(err, resp);
         }
         else {
-            resp.end();
+            queryReturn.displayDataSet(1, resp);
         }
     });
 };
@@ -45,7 +45,7 @@ exports.actualizarOpcionAcompanante = function (req, resp, opcion_acompanante) {
             error.displayError(err, resp);
         }
         else {
-            resp.end();
+            queryReturn.displayDataSet(1, resp);
         }
     });
 

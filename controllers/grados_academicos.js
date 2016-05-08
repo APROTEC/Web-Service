@@ -41,7 +41,7 @@ exports.deleteAcademicGradesFromPerson = function (req, resp, codigo_informacion
             
         }
         else {
-            resp.end();
+            queryReturn.displayDataSet(1, resp);
         }
     });
 };
@@ -54,7 +54,7 @@ exports.insertAcademicGradePerson = function (req, resp, codigo_informacion_pers
             error.displayError(err, resp); 
         }
         else {
-            resp.end();
+            queryReturn.displayDataSet(1, resp);
         }
     });
 };

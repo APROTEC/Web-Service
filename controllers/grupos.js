@@ -37,7 +37,7 @@ exports.actualizarGrupos = function (req, resp, datos_grupos){
             error.displayError(err, resp);
         }
         else {
-            resp.end();
+            queryReturn.displayDataSet(1, resp);
         }
     });
 
@@ -51,7 +51,7 @@ exports.crearGrupo = function (req, resp, grupo){
             error.displayError(err, resp);
         }
         else {
-            resp.end();
+            queryReturn.displayDataSet(1, resp);
         }
     });
 }
@@ -64,7 +64,7 @@ exports.eliminarGrupo = function (req, resp, codigo_grupo) {
             error.displayError(err, resp);
         }
         else {
-            resp.end();
+            queryReturn.displayDataSet(1, resp);
         }
     });
 };
@@ -77,7 +77,7 @@ exports.anadirMiembroAGrupo = function (req, resp,codigo_grupo,codigo_usuario) {
             error.displayError(err, resp);
         }
         else {
-            resp.end();
+            queryReturn.displayDataSet(1, resp);
         }
     });
 };
@@ -89,7 +89,7 @@ exports.borrarMiembroDeGrupo = function (req, resp, codigo_grupo, codigo_usuario
             error.displayError(err, resp);
         }
         else {
-            resp.end();
+            queryReturn.displayDataSet(1, resp);
         }
     });
 };

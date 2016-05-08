@@ -29,14 +29,15 @@ exports.getEvento = function (req, resp, codigo_evento) {
 };
 
 exports.insertEvento = function (req, resp, evento) {
-    var sqlStatement = "insert into eventos (nombre,lugar,fecha_hora,numero_maximo_acompanantes,descripcion,codigo_tipo_evento)"+
-                        "values('" + evento.nombre + "','"+evento.lugar+"',CONVERT(datetime,'"+evento.fecha_hora+"'),"+evento.numero_maximo_acompanantes+",'"+evento.descripcion+"',"+evento.codigo_tipo_evento+")";
+    var sqlStatement = "insert into eventos (nombre,lugar,fecha_hora,numero_maximo_acompanantes,descripcion,codigo_tipo_evento,precio_entrada_asociados,fecha_limite_accion)"+
+                        "values('" + evento.nombre + "','"+evento.lugar+"',CONVERT(datetime,'"+evento.fecha_hora+"'),"+evento.numero_maximo_acompanantes+",'"+evento.descripcion+"',"+evento.codigo_tipo_evento+","+
+                        evento.precio_entrada_asociados+",CONVERT(datetime,'" + evento.fecha_limite_accion + "'))";
     db.executeSql(sqlStatement, function (data, err) {
         if (err) {
             error.displayError(err, resp);
         }
         else {
-            resp.end();
+            queryReturn.displayDataSet(1, resp);
         }
     });
 
@@ -46,18 +47,20 @@ exports.insertEvento = function (req, resp, evento) {
 exports.updateEvento = function (req, resp, evento) {
     var sqlStatement = "update eventos " +
                        "set lugar = '" + evento.lugar + "', " +
-                       "nombre ="+evento.nombre+", "
+                       "nombre = '"+evento.nombre+"', "+
                        "fecha_hora = CONVERT(datetime,'" + evento.fecha_hora + "')," +
                        "numero_maximo_acompanantes = " + evento.numero_maximo_acompanantes + "," +
                        "descripcion = '" + evento.descripcion + "'," +
-                       "codigo_tipo_evento = " + evento.codigo_tipo_evento+
+                       "codigo_tipo_evento = " + evento.codigo_tipo_evento +","+
+                       " precio_entrada_asociados = " + evento.precio_entrada_asociados +","+
+                       "fecha_limite_accion = CONVERT(datetime,'" + evento.fecha_limite_accion + "')" +
                        " where codigo_evento = "+evento.codigo_evento;
     db.executeSql(sqlStatement, function (data, err) {
         if (err) {
             error.displayError(err, resp);
         }
         else {
-            resp.end();
+            queryReturn.displayDataSet(1, resp);
         }
     });
 
@@ -70,7 +73,7 @@ exports.deleteUsuario = function (req, resp, codigo_evento) {
             error.displayError(err, resp);
         }
         else {
-            resp.end();
+            queryReturn.displayDataSet(1, resp);
         }
     });
 
@@ -84,7 +87,7 @@ exports.inviteUserToEvent = function (req, resp, codigo_evento, codigo_usuario) 
             error.displayError(err, resp);
         }
         else {
-            resp.end();
+            queryReturn.displayDataSet(1, resp);
         }
     });
 
@@ -101,7 +104,7 @@ exports.inviteGroupToEvent = function (req, resp, codigo_evento, codigo_grupo) {
             error.displayError(err, resp);
         }
         else {
-            resp.end();
+            queryReturn.displayDataSet(1, resp);
         }
     });
 
@@ -111,7 +114,7 @@ exports.getUserInvitedEvents = function (req, resp, codigo_usuario) {
     var sqlStatement = 
                     "select e.* from Eventos e,Usuarios_Invitados ui "+
                     "where e.codigo_evento = ui.codigo_evento and "+
-                    "ui.codigo_usuario = " + codigo_usuario + " and e.fecha_hora > GETDATE() and " +
+                    "ui.codigo_usuario = " + codigo_usuario + " and e.fecha_limite_accion > GETDATE() and " +
                     "ui.confirmado = 0";
     console.log(sqlStatement);
     db.executeSql(sqlStatement, function (data, err) {

@@ -11,7 +11,7 @@ exports.updateUsuario_Invitado = function (req, resp, usuario_invitado) {
             error.displayError(err, resp);
         }
         else {
-            resp.end();
+            queryReturn.displayDataSet(1, resp);
         }
     });
 
@@ -24,7 +24,7 @@ exports.delete_invitado = function (req, resp, usuario_invitado) {
             error.displayError(err, resp);
         }
         else {
-            resp.end();
+            queryReturn.displayDataSet(1, resp);
         }
     });
 

@@ -114,6 +114,24 @@ exports.changePassword = function (req, resp,codigo_usuario,password) {
             queryReturn.displayDataSet(1, resp);
         }
     });
+};
+
+exports.deleteUser = function (req, resp, codigo_usuario) {
+    var sqlStatement = " delete Grados_Academicos_Personas where codigo_informacion_persona =  " + codigo_usuario +
+                       " delete Actas_usuarios where codigo_usuario = " + codigo_usuario +
+                       " delete Miembros_Grupo where codigo_usuario = " + codigo_usuario +
+                       " delete Usuarios_Invitados where codigo_usuario = " + codigo_usuario +
+                       " delete Acompanantes_Usuarios where codigo_usuario = " + codigo_usuario +
+                       " delete Usuarios where codigo_usuario = " + codigo_usuario +
+                       " delete Informacion_Personas where codigo_informacion_persona =  " + codigo_usuario ;
+     db.executeSql(sqlStatement, function (data, err) {
+        if (err) {
+            error.displayError(err, resp);
+        }
+        else {
+            queryReturn.displayDataSet(1, resp);
+        }
+    });
 
 
 };

@@ -18,13 +18,20 @@ obtiene todos los usuarios
 POST
 inserta nuevo usuario
 /usuarios/:usuario
-tiene que se un json de la forma {'nombre_usuario':'dsdada','contrasena':'c'}
+tiene que se un json de la forma {"nombre_usuario": "correo@gmail.com","contrasena": "c","nombre": "nombre","apellidos": "apellido","cedula": "101110111"
+}
 
 
 put
 
 cambia contrasena
 /usuarios/cambiar_contrasena/:codigo_usuario-:nueva_contrasena
+
+delete
+borra un usuario
+/usuarios/:usuario
+
+ejemplo /usuarios/23
 
 ########### GRADOS_ACADEMICOS ###################
 GET
@@ -127,7 +134,7 @@ Retorna todas las tallas camisas
 
 POST 
 inserta eventos
-/eventos/{"lugar":"Cartago","fecha_hora":"20120618 10:34:09 AM","numero_maximo_acompanantes":4,"descripcion":"Evento de caridad para los afectados del terremoto","codigo_tipo_evento":1}
+/eventos/{"nombre":"Evento_ejemplo","lugar":"Cartago","fecha_hora":"20150618 10:34:09 AM","numero_maximo_acompanantes":4,"descripcion":"Evento de caridad para los afectados del terremoto","codigo_tipo_evento":1,"precio_entrada_asociados":2000,"fecha_limite_accion":"20140615 10:34:09 AM"}
 
 Invita usuario a evento
 
@@ -140,7 +147,7 @@ invita grupo a evento
 
 PUT actualiza eventos
 
-/eventos/{"nombre": "Evento de Caridad","codigo_evento":3,lugar":"Cartago","fecha_hora":"20120618 10:34:09 AM","numero_maximo_acompanantes":4,"descripcion":"Evento de caridad para los afectados del terremoto","codigo_tipo_evento":1}
+/eventos/{"codigo_evento":3,"nombre":"Evento_ejemplo","lugar":"Cartago","fecha_hora":"20150618 10:34:09 AM","numero_maximo_acompanantes":4,"descripcion":"Evento de caridad para los afectados del terremoto","codigo_tipo_evento":1,"precio_entrada_asociados":2000,"fecha_limite_accion":"20140615 10:34:09 AM"}
 
 GET
 
@@ -304,14 +311,14 @@ ejemplo: /acta/{"nombre_acta":"ejemplo","descripcion_acta":"prueba"}
 
 
 
+#####email###########
 
+envia emails a muchas personas
 
+/email/:asunto/:destinatarios/:texto
 
+ejemplo
 
-
-
-
-
-
+/email/asunto/correo1@gmail.com,correo2@gmail.com/texto
 
 
