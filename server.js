@@ -22,6 +22,9 @@ var documentos_usuarios = require('./controllers/actas_usuarios.js')
 var passwordRetriever = require('./controllers/RecuperadorDeContrasenas.js');
 var photos = require('./controllers/fotos.js');
 var emailManager = require('./controllers/emaIlManager.js');
+var comentarios = require('./controllers/Comentarios.js');
+var evento_opciones_acompanantes = require('./controllers/evento_opcion_acompanantes.js');
+
 
 
 
@@ -32,6 +35,35 @@ app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     res.header("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
     next();
+});
+
+
+
+
+app.get('/evento_acompanantes/:codigo_evento',function (req, res) {
+    evento_opciones_acompanantes.getAllEventosOpcionAcompanantes(req, res, req.params.codigo_evento);
+});
+
+
+app.post('/evento_acompanantes/:evento_opcion_acompanante', function (req, res) {
+    evento_opciones_acompanantes.insertEvento_Opcion_Acompanante(req, res, JSON.parse(req.params.evento_opcion_acompanante));
+});
+
+app.delete('/evento_acompanantes/:evento_opcion_acompanante', function (req, res) {
+    evento_opciones_acompanantes.deleteEvento_Opcion_Acompanante(req, res, JSON.parse(req.params.evento_opcion_acompanante));
+});
+
+app.get('/comentarios/:codigo_evento', function (req, res) {
+    comentarios.getAllCommentsFromEvent(req, res, req.params.codigo_evento);
+});
+
+
+app.post('/comentarios/:comentario', function (req, res) {
+    comentarios.insertComment(req, res, JSON.parse(req.params.comentario));
+});
+
+app.delete('/comentarios/:codigo_comentario', function (req, res) {
+    comentarios.deleteComment(req, res,req.params.codigo_comentario);
 });
 
 

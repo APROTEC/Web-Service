@@ -322,3 +322,45 @@ ejemplo
 /email/asunto/correo1@gmail.com,correo2@gmail.com/texto
 
 
+
+######comentario##################
+
+get 
+/comentarios/:codigo_evento
+obtiene todos los comentarios relacionados a un evento
+
+post
+
+/comentarios/:comentario
+
+inserta nuevo comentario
+
+comentario json de la forma
+{"codigo_evento":3,"codigo_usuario":1,"comentario":"Me gusto"}
+
+
+delete
+
+borra comentario
+
+/comentarios/:codigo_comentario
+
+
+##########eventos_opciones_acompanantes##################
+
+
+post 
+inserta
+/evento_acompanantes/{"codigo_evento":3,"codigo_opcion_acompanante":1,"precio":2000}
+
+get
+obtiene todos los opciones de acompanantes de un evento
+
+/evento_acompanantes/3
+
+delete
+
+borra un evento opcion_acompanate
+
+
+/evento_acompanantes/{"codigo_evento":3,"codigo_opcion_acompanante":1}
