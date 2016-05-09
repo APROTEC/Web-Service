@@ -66,8 +66,10 @@ exports.updateEvento = function (req, resp, evento) {
 
 };
 
-exports.deleteUsuario = function (req, resp, codigo_evento) {
-    var sqlStatement = "delete eventos where codigo_evento = "+codigo_evento;
+exports.deleteEvento = function (req, resp, codigo_evento) {
+    var sqlStatement =
+        "delete evento_opciones_acompanante where codigo_evento = " + codigo_evento+" "+ 
+        "delete eventos where codigo_evento = " + codigo_evento;
     db.executeSql(sqlStatement, function (data, err) {
         if (err) {
             error.displayError(err, resp);

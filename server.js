@@ -24,6 +24,7 @@ var photos = require('./controllers/fotos.js');
 var emailManager = require('./controllers/emaIlManager.js');
 var comentarios = require('./controllers/Comentarios.js');
 var evento_opciones_acompanantes = require('./controllers/evento_opcion_acompanantes.js');
+var acompanantes_usuarios = require('./controllers/usuarios_acompanantes.js');
 
 
 
@@ -37,7 +38,13 @@ app.use(function (req, res, next) {
     next();
 });
 
+app.get('/usuarios_acompanantes/:codigo_evento-:codigo_usuario', function (req, res) {
+    acompanantes_usuarios.getAllUserGuests(req, res, req.params.codigo_evento, req.params.codigo_usuario);
+});
 
+app.post('/usuarios_acompanantes/:acompanante_usuario', function (req, res) {
+    acompanantes_usuarios.insertAcompanante(req, res, JSON.parse(req.params.acompanante_usuario));
+});
 
 
 app.get('/evento_acompanantes/:codigo_evento',function (req, res) {
@@ -238,6 +245,12 @@ app.put('/eventos/:evento', function (req, res) {
 app.post('/eventos/:evento', function (req, res) {
     eventos.insertEvento(req, res, JSON.parse(req.params.evento));
 });
+
+
+app.delete('/eventos/:evento', function (req, res) {
+    eventos.deleteEvento(req, res, req.params.evento);
+});
+
 
 
 app.get('/grupos', function (req, res) {

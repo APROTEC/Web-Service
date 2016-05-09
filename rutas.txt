@@ -364,3 +364,23 @@ borra un evento opcion_acompanate
 
 
 /evento_acompanantes/{"codigo_evento":3,"codigo_opcion_acompanante":1}
+
+
+
+
+######acompanantes_usuarios####################################
+
+
+
+get
+
+obtiene todos los invitados a un evento de un usuario
+/usuarios_acompanantes/:codigo_evento-:codigo_usuario
+/usuarios_acompanantes/3-1
+
+
+
+post
+inserta un invitado, si devuelve -1 es por que excedio el numero limite de invitados
+
+/usuarios_acompanantes/{"codigo_evento":3,"codigo_usuario":1,"codigo_opcion_acompanante":1,"numero_acompanantes":1}
