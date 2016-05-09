@@ -131,6 +131,9 @@ Retorna todas las tallas camisas
 
 
 #######EVENTOS##########
+delete
+/eventos/:codigo_evento
+
 
 POST 
 inserta eventos
