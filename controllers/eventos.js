@@ -166,7 +166,7 @@ exports.getUserFinishedEvents = function (req, resp, codigo_usuario) {
 
 exports.getInvitedUsersToEvent = function (req, resp, codigo_evento) {
     var sqlStatement = "select u.codigo_usuario, "+ 
-                        "p.codigo_informacion_persona, p.nombre, p.apellidos, p.fecha_nacimiento, "+
+                        "p.codigo_informacion_persona,p.foto ,p.nombre, p.apellidos, p.fecha_nacimiento, "+
                         "p.correo_personal, p.codigo_talla_camisa, p.cargo_jefatura, "+
                         "p.vegetariano, p.codigo_sede, p.codigo_canton, p.codigo_sub_departamento, p.cedula, "+
                         "p.correo_institucional, p.telefono_trabajo, p.numero_extension "+
@@ -186,7 +186,7 @@ exports.getInvitedUsersToEvent = function (req, resp, codigo_evento) {
 
 exports.getConfirmedUsersToEvent = function (req, resp, codigo_evento) {
     var sqlStatement = "select u.codigo_usuario, " + 
-                        "p.codigo_informacion_persona, p.nombre, p.apellidos, p.fecha_nacimiento, " +
+                        "p.codigo_informacion_persona,p.foto, p.nombre, p.apellidos, p.fecha_nacimiento, " +
                         "p.correo_personal, p.codigo_talla_camisa, p.cargo_jefatura, " +
                         "p.vegetariano, p.codigo_sede, p.codigo_canton, p.codigo_sub_departamento, p.cedula, " +
                         "p.correo_institucional, p.telefono_trabajo, p.numero_extension "+

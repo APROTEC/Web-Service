@@ -117,7 +117,8 @@ exports.changePassword = function (req, resp,codigo_usuario,password) {
 };
 
 exports.deleteUser = function (req, resp, codigo_usuario) {
-    var sqlStatement = " delete Grados_Academicos_Personas where codigo_informacion_persona =  " + codigo_usuario +
+    var sqlStatement = "delete encuestas_usuarios where codigo_usuario = " +codigo_usuario+" "+
+                       " delete Grados_Academicos_Personas where codigo_informacion_persona =  " + codigo_usuario +
                        " delete Actas_usuarios where codigo_usuario = " + codigo_usuario +
                        " delete Miembros_Grupo where codigo_usuario = " + codigo_usuario +
                        " delete Usuarios_Invitados where codigo_usuario = " + codigo_usuario +

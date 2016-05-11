@@ -25,6 +25,8 @@ var emailManager = require('./controllers/emaIlManager.js');
 var comentarios = require('./controllers/Comentarios.js');
 var evento_opciones_acompanantes = require('./controllers/evento_opcion_acompanantes.js');
 var acompanantes_usuarios = require('./controllers/usuarios_acompanantes.js');
+var encuestas = require('./controllers/encuestas.js');
+var encuestas_usuarios = require('./controllers/encuestas_usuarios.js');
 
 
 
@@ -36,6 +38,49 @@ app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     res.header("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
     next();
+});
+
+
+app.get('/encuestas_usuarios/encuesta/:codigo_encuesta', function (req, res) {
+    encuestas_usuarios.getAllUsariosFromEncuesta(req, res, req.params.codigo_encuesta);
+});
+
+app.get('/encuestas_usuarios/usuario/:codigo_usuario', function (req, res) {
+    encuestas_usuarios.getAllSurveysFromUser(req, res, req.params.codigo_usuario);
+});
+
+app.post('/encuestas_usuarios/usuario/:codigo_encuesta-:codigo_usuario', function (req, res) {
+    encuestas_usuarios.insertUsuario(req, res, req.params.codigo_encuesta, req.params.codigo_usuario);
+});
+
+app.post('/encuestas_usuarios/grupos/:codigo_encuesta-:codigo_grupo', function (req, res) { 
+    encuestas_usuarios.insertGroup(req, res, req.params.codigo_encuesta, req.params.codigo_grupo);
+});
+
+app.delete('/encuestas_usuarios/:codigo_encuesta-:codigo_usuario', function (req, res) {
+
+    encuestas_usuarios.deleteUsuario(req, res, req.params.codigo_encuesta, req.params.codigo_usuario);
+});
+
+
+app.get('/encuestas/', function (req, res) {
+    encuestas.getAllEncuestas(req, res);
+});
+
+app.get('/encuestas/:codigo_encuesta', function (req, res) {
+    encuestas.getEncuesta(req, res, req.params.codigo_encuesta);
+});
+
+app.post('/encuestas/:encuesta', function (req, res) {
+    encuestas.insertEncuesta(req, res, JSON.parse(req.params.encuesta));
+});
+
+app.put('/encuestas/:encuesta', function (req, res) {
+    encuestas.updateEncuesta(req, res, JSON.parse(req.params.encuesta));
+});
+
+app.delete('/encuestas/:codigo_encuesta', function (req, res) {
+    encuestas.deleteEncuesta(req, res, req.params.codigo_encuesta);
 });
 
 app.get('/usuarios_acompanantes/:codigo_evento-:codigo_usuario', function (req, res) {

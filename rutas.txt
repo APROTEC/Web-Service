@@ -387,3 +387,62 @@ post
 inserta un invitado, si devuelve -1 es por que excedio el numero limite de invitados
 
 /usuarios_acompanantes/{"codigo_evento":3,"codigo_usuario":1,"codigo_opcion_acompanante":1,"numero_acompanantes":1}
+
+
+##############ENCUESTAS####################
+
+
+POST INSERTA ENCUESTA
+/encuestas/{"nombre_encuesta":"encuesta_ejemplo","link_encuesta":"hola"}
+
+
+PUT ACTUALIZA ENCUESTA
+
+/encuestas/{"codigo_encuesta":1,"nombre_encuesta":"encuesta_ejemplo","link_encuesta":"hola"}
+
+
+GET
+obtiene todas las encuestas
+/encuestas/
+
+obtiene una encuesta
+/encuestas/:codigo_encuesta
+
+delete
+
+/encuestas/:codigo_encuesta
+
+
+##############ENCUESTAS-USUARIOS##################
+
+
+POST
+
+INSERTA GRUPO
+
+/encuestas_usuarios/grupos/:codigo_encuesta-:codigo_grupo
+
+
+INSERTA USUARIO
+
+
+/encuestas_usuarios/usuario/:codigo_encuesta-:codigo_usuario
+
+
+GET
+
+TRAE TODOS LOS USUARIOS RELACIONADOS A UNA ENCUESTA
+/encuestas_usuarios/encuesta/:codigo_encuesta
+
+TRAE TODOS LAS ENCUESTAS ASOCIADAS A UN USUARIO
+
+/encuestas_usuarios/usuario/:codigo_usuario
+
+
+DELETE
+BORRA UN REGISTRO
+
+/encuestas_usuarios/:codigo_encuesta-:codigo_usuario
+
+
+
