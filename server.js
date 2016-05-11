@@ -27,6 +27,7 @@ var evento_opciones_acompanantes = require('./controllers/evento_opcion_acompana
 var acompanantes_usuarios = require('./controllers/usuarios_acompanantes.js');
 var encuestas = require('./controllers/encuestas.js');
 var encuestas_usuarios = require('./controllers/encuestas_usuarios.js');
+var eventos_documentos = require('./controllers/eventos_documentos.js');
 
 
 
@@ -40,6 +41,19 @@ app.use(function (req, res, next) {
     next();
 });
 
+
+app.get('/eventos_documentos/:codigo_evento', function (req, res) {
+    eventos_documentos.getAllDocumentsFromEvents(req, res, req.params.codigo_evento);
+});
+
+app.post('/eventos_documentos/:evento_documento', function (req, res) {
+    eventos_documentos.insertDocoument(req, res, JSON.parse(req.params.evento_documento));
+});
+
+
+app.delete('/eventos_documentos/:codigo_evento_documento', function (req, res) {
+    eventos_documentos.deleteDocumento(req, res, req.params.codigo_evento_documento);
+});
 
 app.get('/encuestas_usuarios/encuesta/:codigo_encuesta', function (req, res) {
     encuestas_usuarios.getAllUsariosFromEncuesta(req, res, req.params.codigo_encuesta);
@@ -128,11 +142,11 @@ app.get('/actas_usuarios/actas/:codigo_acta', function (req, res) {
     documentos_usuarios.getDocumentInvitations(req, res, req.params.codigo_acta);
 });
 
-app.post('/actas_usuarios/usuario/:codigo_acta-:codigo_usuario', function (req, res) {
+app.post('/actas_usuarios/usuario/:codigo_acta-:codigo_usuario', function (req, res) { 
     documentos_usuarios.insertUser(req, res,req.params.codigo_acta, req.params.codigo_usuario);
 });
 
-app.post('/actas_usuarios/grupo/:codigo_acta-:codigo_grupo', function (req, res) {
+app.post('/actas_usuarios/grupo/:codigo_acta-:codigo_grupo', function (req, res) { 
     documentos_usuarios.insertGroupIntoDocument(req, res, req.params.codigo_acta, req.params.codigo_grupo);
 });
 
@@ -143,7 +157,7 @@ app.delete('/actas_usuarios/:codigo_acta-:codigo_usuario', function (req, res) {
 
 app.post('/actas/:acta', function (req, res) {
     documentos.loadDocument(req, res, JSON.parse(req.params.acta));
-
+    
 });
 
 
@@ -268,7 +282,7 @@ app.get('/tallas_camisas/', function (req, res) {
 
 app.get('/eventos/', function (req, res) {
     eventos.getAllEventos(req, res);
-
+        
 });
 
 app.get('/eventos/:codigo_evento', function (req, res) {
@@ -322,7 +336,7 @@ app.delete('/grupos/:codigo_grupo', function (req, res) {
 
 app.post('/miembros_grupo/:codigo_grupo-:codigo_usuario', function (req, res) {
     grupos.anadirMiembroAGrupo(req, res, req.params.codigo_grupo, req.params.codigo_usuario);
-});
+}); 
 
 app.delete('/miembros_grupo/:codigo_grupo-:codigo_usuario', function (req, res) {
     grupos.borrarMiembroDeGrupo(req, res, req.params.codigo_grupo, req.params.codigo_usuario);
@@ -343,7 +357,7 @@ app.get('/tipos_eventos/:codigo_tipo_evento', function (req, res) {
 app.post('/tipos_eventos/:tipo_evento', function (req, res) {
     tipos_eventos.crearTipoEvento(req, res, JSON.parse(req.params.tipo_evento));
 });
-
+   
 
 app.put('/tipos_eventos/:tipo_evento', function (req, res) {
     tipos_eventos.actualizarTipoEvento(req, res, JSON.parse(req.params.tipo_evento));
@@ -424,15 +438,14 @@ app.post('/email/:asunto/:destinatarios/:texto', function (req, res) {
 
 
 
-app.listen(process.env.PORT || 5000)
 
-/*
+
+
 var server = app.listen(8081, function () {
-
+	
 	var host = server.address().address
 	var port = server.address().port
-
+	
 	console.log("Example app listening at http://%s:%s", host, port)
 
 });
-*/

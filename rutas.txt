@@ -445,4 +445,23 @@ BORRA UN REGISTRO
 /encuestas_usuarios/:codigo_encuesta-:codigo_usuario
 
 
+############### EVENTOS-DOCUMENTOS #########
+
+POST 
+INSERTA DOCUMENTO
+SE INSERTA IGUAL QUE LAS ACTAS
+/eventos_documentos/{"codigo_evento":3,"nombre_documento":"doc_ejemplo"}
+
+
+GET
+OBTIENE TODOS LOS DOCUMENTOS RELACIONADOS A UN EVENTO
+/eventos_documentos/:codigo_evento
+
+
+DELETE
+
+
+borra documento relacionado a un evento
+/eventos_documentos/:codigo_evento_documento
+
 
