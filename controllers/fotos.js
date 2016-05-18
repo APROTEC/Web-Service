@@ -20,8 +20,6 @@ var storage = multer.diskStorage({
     filename: function (req, file, cb) {
     
         fileName = file.originalname;
-        console.log("Archivo");
-        console.log(fileName);
         cb(null, fileName);
         
     }
@@ -30,14 +28,14 @@ var storage = multer.diskStorage({
 var upload = multer({
     //multer settings
     storage: storage
-}).single('file');
+}).single('upl');
 
 
 
 updatePersonInformation = function (codigo_informacion_persona) {
     var sqlStatement = "update informacion_personas set foto = 'aprotecstorage.blob.core.windows.net/photos/" + codigo_informacion_persona + "' where codigo_informacion_persona = " + codigo_informacion_persona;
     db.executeSql(sqlStatement, function (data, err) {
-        //fs.unlinkSync('.//uploads//' + fileName);
+        fs.unlinkSync('.//uploads//' + fileName);
       
     });
 };

@@ -3,6 +3,7 @@ var port = process.env.port || 1337;
 
 var express = require('express');
 var app = express();
+
 var usuarios = require('./controllers/usuarios');
 var grados_academicos = require('./controllers/grados_academicos')
 var personas = require('./controllers/informacion_personas')
@@ -28,7 +29,8 @@ var acompanantes_usuarios = require('./controllers/usuarios_acompanantes.js');
 var encuestas = require('./controllers/encuestas.js');
 var encuestas_usuarios = require('./controllers/encuestas_usuarios.js');
 var eventos_documentos = require('./controllers/eventos_documentos.js');
-
+var multer = require('multer');
+var bodyParser = require('body-parser')
 
 
 
@@ -326,6 +328,10 @@ app.put('/grupos/:grupo', function (req, res) {
     grupos.actualizarGrupos(req, res, JSON.parse(req.params.grupo));
 });
 
+app.get('/grupos/count_miembros/:codigo_grupo', function (req, res){
+    grupos.getNumeroMiembros(req, res, req.params.codigo_grupo);
+})
+
 app.post('/grupos/:grupo', function (req, res) {
     grupos.crearGrupo(req, res, JSON.parse(req.params.grupo));
 });
@@ -344,6 +350,10 @@ app.delete('/miembros_grupo/:codigo_grupo-:codigo_usuario', function (req, res) 
 
 app.get('/miembros_grupos/:codigo_grupo', function (req, res) {
     grupos.extraerInformacionGrupo(req,res,req.params.codigo_grupo);
+});
+
+app.get('/grupos/count/:codigo_grupo', function (req, res) {
+    grupos.getNumeroMiembros(req, res, req.params.codigo_grupo);
 });
 
 app.get('/tipos_eventos/', function (req, res) {
@@ -389,6 +399,18 @@ app.delete('/usuarios_invitados/:usuario_invitado', function (req, res) {
     usuarios_invitados.delete_invitado(req, res, JSON.parse(req.params.usuario_invitado));
 });
 
+app.get('/usuarios_invitados/count_invitados/:codigo_evento', function (req, res) {
+    usuarios_invitados.getCantidadInvitados(req, res, req.params.codigo_evento);
+});
+
+app.get('/usuarios_invitados/count_confirmados/:codigo_evento', function (req, res) {
+    usuarios_invitados.getCantidadInvitadosConfirmados(req, res, req.params.codigo_evento);
+});
+
+app.get('/usuarios_invitados/count_acompanantes/:codigo_evento', function (req, res) {
+    usuarios_invitados.getCantidadAcompanantes(req, res, req.params.codigo_evento);
+});
+
 app.get('/usuario_valido/:username', function (req, res) {
     usuarios.getUsuarioValido(req, res, req.params.username);
 });
@@ -419,7 +441,7 @@ app.post('/usuarios/recuperar_contrasena/:nombre_usuario', function (req, res) {
     passwordRetriever.enviarPassword(req, res, req.params.nombre_usuario);
 });
 
-app.post('/photos/:codigo_informacion_persona', function (req, res) {
+app.post('/photos/:codigo_informacion_persona'/*,multer({ dest: './uploads/' },filename:).single('upl')*/, function (req, res){
     photos.loadPhoto(req, res, req.params.codigo_informacion_persona);
 });
 

@@ -118,7 +118,6 @@ exports.getUserInvitedEvents = function (req, resp, codigo_usuario) {
                     "where e.codigo_evento = ui.codigo_evento and "+
                     "ui.codigo_usuario = " + codigo_usuario + " and e.fecha_limite_accion > GETDATE() and " +
                     "ui.confirmado = 0";
-    console.log(sqlStatement);
     db.executeSql(sqlStatement, function (data, err) {
         if (err) {
             error.displayError(err, resp);

@@ -33,3 +33,49 @@ exports.delete_invitado = function (req, resp, usuario_invitado) {
     });
 
 };
+
+exports.getCantidadInvitados = function (req, resp, codigo_evento) {
+    var sqlStatement = 'select COUNT(codigo_usuario) as invitados ' +
+                        'from usuarios_invitados ' +
+                        'where codigo_evento = ' + codigo_evento;
+    db.executeSql(sqlStatement, function (data, err) {
+        if (err) {
+            error.displayError(err, resp);
+        }
+        else {
+            queryReturn.displayDataSet(data, resp);
+        }
+    });
+};
+
+
+exports.getCantidadInvitadosConfirmados = function (req, resp, codigo_evento) {
+    var sqlStatement = 'select COUNT(codigo_usuario) as invitados ' +
+                        'from usuarios_invitados ' +
+                        'where codigo_evento = ' + codigo_evento + ' ' +
+                        'and confirmado = 1';
+    db.executeSql(sqlStatement, function (data, err) {
+        if (err) {
+            error.displayError(err, resp);
+        }
+        else {
+            queryReturn.displayDataSet(data, resp);
+        }
+    });
+};
+
+
+exports.getCantidadAcompanantes = function (req, resp, codigo_evento){
+    var sqlStatement = "select oa.descripcion, sum(au.numero_acompanantes) " +
+                        "from acompanantes_usuarios au, opciones_acomponante oa " +
+                        "where au.codigo_evento = " + codigo_evento + " and oa.codigo_opcion_acompanante = au.codigo_opcion_acompanante " +
+                        "group by au.codigo_opcion_acompanante, oa.descripcion";
+    db.executeSql(sqlStatement, function (data, err) {
+        if (err) {
+            error.displayError(err, resp);
+        }
+        else {
+            queryReturn.displayDataSet(data, resp);
+        }
+    });
+}

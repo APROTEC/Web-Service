@@ -16,6 +16,22 @@ exports.getAllGrupos = function (req, resp) {
 
 };
 
+
+exports.getNumeroMiembros = function (req, resp, codigo_grupo) {
+    var sqlStatement = "select COUNT(codigo_usuario) " +
+                        "from miembros_grupo " +
+                        "where codigo_grupo = " + codigo_grupo;
+    db.executeSql(sqlStatement, function (data, err) {
+        if (err) {
+            error.displayError(err, resp);
+        }
+        else {
+            queryReturn.displayDataSet(data, resp);
+        }
+    });
+
+};
+
 exports.getGrupo = function (req, resp, codigo_grupo){
     var sqlStatement = "select * from grupos where codigo_grupo = " + codigo_grupo;
     db.executeSql(sqlStatement, function (data, err) {
