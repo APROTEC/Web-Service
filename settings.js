@@ -1,7 +1,7 @@
 ﻿exports.dbConfig = {
-    user : "admin_server@aprotec-server",
+    user : "admin-server@aprotecserver",
     password : "Aprotec2016",
-    server : "aprotec-server.database.windows.net",
+    server : "aprotecserver.database.windows.net",
     database : "aprotecBD",
     port : 1433,
 

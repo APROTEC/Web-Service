@@ -9,7 +9,7 @@ angular.module('fileUpload', ['ngFileUpload'])
     
     vm.upload = function (file) {
         Upload.upload({
-            url: 'http://localhost:8081/eventos_documentos/{"codigo_evento":3,"nombre_documento":"doc_ejemplo"}', //webAPI exposed to upload the file
+            url: 'http://localhost:8081/actas/{"nombre_acta":"ejemplo","descripcion_acta":"prueba"}', //webAPI exposed to upload the file
             data:{file:file} //pass file as data, should be user ng-model
         }).then(function (resp) { //upload function returns a promise
             if(resp.data.error_code === 0){ //validate success

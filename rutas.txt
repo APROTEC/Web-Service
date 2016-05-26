@@ -326,7 +326,7 @@ post
 
 sube un acta
 /actas/:acta
-ejemplo: /acta/{"nombre_acta":"ejemplo","descripcion_acta":"prueba"}
+ejemplo: /actas/{"nombre_acta":"ejemplo","descripcion_acta":"prueba"}
 
 
 

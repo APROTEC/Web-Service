@@ -1,7 +1,7 @@
-﻿var multer = require('multer');
+var multer = require('multer');
 var azure = require('azure-storage');
-var accessKey = 'VfC/yuWFW+m+8VYRmz9JzeNjWafK3Yvtjo9KUuKzrYwM0Hmde+chuF5FScerd9afhfD+svYYrToJ3XJTvYhs1Q==';
-var storageAccount = 'aprotecstorage';
+var accessKey = 'nyiXx2ANiQJ/fzBbq3DEozU3PRnDXbWFe03jtvAehq8dzIkFJZTHXZ3bjGTZNQO2WEVuyZ1/G8+7yUMG7e9IDg==';
+var storageAccount = 'aprotec';
 var containerName = 'documentos';
 var error = require('./error.js');
 var queryReturn = require('./queryReturn.js');
@@ -61,6 +61,7 @@ getDocumentId = function (req, res) {
         }
         else {
             documentId = data[0].id;
+            console.log('hola '+documentId);
             upload(req, res, function (err) {
                 if (err) {
                     res.json({ error_code: 1, err_desc: err });
@@ -76,13 +77,17 @@ getDocumentId = function (req, res) {
 
 
 insertDocument = function (req, res, documento) {
+    console.log(documento.nombre_acta);
+    console.log(documento.descripcion_acta);
     var sqlStatement = "insert into actas (nombre_acta,descripcion_acta)" +
                         "values('" + documento.nombre_acta + "','" + documento.descripcion_acta + "')";
     db.executeSql(sqlStatement, function (data, err) {
         if (err) {
+            console.log('llegue aki error');
             error.displayError(err, resp);
         }
         else {
+            console.log('llegue aki');
             getDocumentId(req,res);
         }
     });
@@ -91,7 +96,8 @@ insertDocument = function (req, res, documento) {
 
 
 exports.loadDocument = function (req, res, documento) {
-    insertDocument(req,res,documento);
+    console.log('hola');
+   insertDocument(req,res,documento);
    
 };
 
