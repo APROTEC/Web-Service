@@ -29,7 +29,7 @@ var acompanantes_usuarios = require('./controllers/usuarios_acompanantes.js');
 var encuestas = require('./controllers/encuestas.js');
 var encuestas_usuarios = require('./controllers/encuestas_usuarios.js');
 var eventos_documentos = require('./controllers/eventos_documentos.js');
-var multer = require('multer');
+
 var bodyParser = require('body-parser')
 
 
@@ -45,15 +45,18 @@ app.use(function (req, res, next) {
 
 
 app.get('/eventos_documentos/:codigo_evento', function (req, res) {
+    eventos_documentos = requireUncached('./controllers/eventos_documentos.js');
     eventos_documentos.getAllDocumentsFromEvents(req, res, req.params.codigo_evento);
 });
 
 app.post('/eventos_documentos/:evento_documento', function (req, res) {
+    eventos_documentos = requireUncached('./controllers/eventos_documentos.js');
     eventos_documentos.insertDocoument(req, res, JSON.parse(req.params.evento_documento));
 });
 
 
 app.delete('/eventos_documentos/:codigo_evento_documento', function (req, res) {
+    eventos_documentos = requireUncached('./controllers/eventos_documentos.js');
     eventos_documentos.deleteDocumento(req, res, req.params.codigo_evento_documento);
 });
 
@@ -158,22 +161,26 @@ app.delete('/actas_usuarios/:codigo_acta-:codigo_usuario', function (req, res) {
 
 
 app.post('/actas/:acta', function (req, res) {
+    documentos = requireUncached('./controllers/documentos.js');
     documentos.loadDocument(req, res, JSON.parse(req.params.acta));
     
 });
 
 
 app.get('/actas/', function (req, res) {
+    documentos = requireUncached('./controllers/documentos.js');
     documentos.getDocuments(req, res);
 });
 
 
 app.get('/actas/:codigo_acta', function (req, res) {
+    documentos = requireUncached('./controllers/documentos.js');
     documentos.getDocument(req, res,req.params.codigo_acta);
 });
 
 
 app.delete("/actas/:codigo_acta", function (req, res) {
+    documentos = requireUncached('./controllers/documentos.js');
     documentos.deleteDocument(req, res, req.params.codigo_acta);
 });
 
@@ -442,6 +449,7 @@ app.post('/usuarios/recuperar_contrasena/:nombre_usuario', function (req, res) {
 });
 
 app.post('/photos/:codigo_informacion_persona'/*,multer({ dest: './uploads/' },filename:).single('upl')*/, function (req, res){
+    photos = requireUncached('./controllers/fotos.js');
     photos.loadPhoto(req, res, req.params.codigo_informacion_persona);
 });
 
@@ -452,15 +460,10 @@ app.post('/email/:asunto/:destinatarios/:texto', function (req, res) {
 });
 
 
-
-
-
-
-
-
-
-
-
+function requireUncached(module){
+    delete require.cache[require.resolve(module)]
+    return require(module)
+}
 
 
 var server = app.listen(8081, function () {

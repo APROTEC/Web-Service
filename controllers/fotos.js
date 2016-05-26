@@ -33,7 +33,7 @@ var upload = multer({
 
 
 updatePersonInformation = function (codigo_informacion_persona) {
-    var sqlStatement = "update informacion_personas set foto = 'aprotecstorage.blob.core.windows.net/photos/" + codigo_informacion_persona + "' where codigo_informacion_persona = " + codigo_informacion_persona;
+    var sqlStatement = "update informacion_personas set foto = 'aprotec.blob.core.windows.net/photos/" + codigo_informacion_persona + "' where codigo_informacion_persona = " + codigo_informacion_persona;
     db.executeSql(sqlStatement, function (data, err) {
         fs.unlinkSync('.//uploads//' + fileName);
       

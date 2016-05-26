@@ -34,7 +34,7 @@ var upload = multer({
 
 
 updateDocument = function () {
-    var sqlStatement = "update eventos_documentos set link_documento = 'aprotecstorage.blob.core.windows.net/documentos-eventos/" + fileName + "' where codigo_evento_documento = " + documentId;
+    var sqlStatement = "update eventos_documentos set link_documento = 'aprotec.blob.core.windows.net/documentos-eventos/" + fileName + "' where codigo_evento_documento = " + documentId;
     db.executeSql(sqlStatement, function (data, err) {
         fs.unlinkSync('.//uploads//' + fileName);
       
@@ -75,7 +75,7 @@ getDocumentId = function (req, res) {
 };
 
 
-insertDocument = function (req, res, documento) {
+insertDocumentoEvento = function (req, res, documento) {
     var sqlStatement = "insert into eventos_documentos (codigo_evento,nombre_documento,link_documento)" +
                         "values('" + documento.codigo_evento+"','" + documento.nombre_documento + "','sin enlace')";
     db.executeSql(sqlStatement, function (data, err) {
@@ -105,7 +105,7 @@ exports.getAllDocumentsFromEvents = function (req, resp, codigo_evento) {
 };
 
 
-exports.deleteDocumento = function (req, resp, codigo_evento_documento) {
+exports.deleteDocumentoEvento = function (req, resp, codigo_evento_documento) {
     var sqlStatement = "delete eventos_documentos " +
                        "where codigo_evento_documento = " + codigo_evento_documento;
     db.executeSql(sqlStatement, function (data, err) {
@@ -119,6 +119,6 @@ exports.deleteDocumento = function (req, resp, codigo_evento_documento) {
       
 };
 
-exports.insertDocoument = function (req, res, documento) {
+exports.insertDocumentoEvento = function (req, res, documento) {
     insertDocument(req, res, documento);
 };

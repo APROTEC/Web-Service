@@ -6,8 +6,6 @@ var containerName = 'documentos';
 var error = require('./error.js');
 var queryReturn = require('./queryReturn.js');
 var db = require("../core/db");
-var error = require("./error");
-var queryReturn = require("./queryReturn.js")
 var fs = require('fs');
 
 
@@ -34,7 +32,7 @@ var upload = multer({
 
 
 updateDocument = function () {
-    var sqlStatement = "update actas set link_acta = 'aprotecstorage.blob.core.windows.net/documentos/" + fileName + "' where codigo_acta = " + documentId;
+    var sqlStatement = "update actas set link_acta = 'aprotec.blob.core.windows.net/documentos/" + fileName + "' where codigo_acta = " + documentId;
     db.executeSql(sqlStatement, function (data, err) {
         fs.unlinkSync('.//uploads//' + fileName);
       
@@ -54,14 +52,14 @@ loadDocumentAzure = function (req, resp) {
 
 
 getDocumentId = function (req, res) {
+     
     var sqlStatement = "select IDENT_CURRENT('actas') as id";
     db.executeSql(sqlStatement, function (data, err) {
         if (err) {
-            error.displayError(err, resp);
+            error.displayError(err, res);
         }
         else {
             documentId = data[0].id;
-            console.log('hola '+documentId);
             upload(req, res, function (err) {
                 if (err) {
                     res.json({ error_code: 1, err_desc: err });
@@ -76,19 +74,19 @@ getDocumentId = function (req, res) {
 };
 
 
-insertDocument = function (req, res, documento) {
-    console.log(documento.nombre_acta);
-    console.log(documento.descripcion_acta);
+insertDocumento = function (req, res, documento) {
+    console.log('hola');
+
     var sqlStatement = "insert into actas (nombre_acta,descripcion_acta)" +
                         "values('" + documento.nombre_acta + "','" + documento.descripcion_acta + "')";
     db.executeSql(sqlStatement, function (data, err) {
         if (err) {
-            console.log('llegue aki error');
-            error.displayError(err, resp);
+     
+            error.displayError(err, res);
         }
         else {
-            console.log('llegue aki');
-            getDocumentId(req,res);
+      
+            this.getDocumentId(req,res);
         }
     });
 
@@ -96,8 +94,7 @@ insertDocument = function (req, res, documento) {
 
 
 exports.loadDocument = function (req, res, documento) {
-    console.log('hola');
-   insertDocument(req,res,documento);
+   insertDocumento(req,res,documento);
    
 };
 
