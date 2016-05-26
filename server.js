@@ -51,13 +51,13 @@ app.get('/eventos_documentos/:codigo_evento', function (req, res) {
 
 app.post('/eventos_documentos/:evento_documento', function (req, res) {
     eventos_documentos = requireUncached('./controllers/eventos_documentos.js');
-    eventos_documentos.insertDocoument(req, res, JSON.parse(req.params.evento_documento));
+    eventos_documentos.insertDocumentoEvento(req, res, JSON.parse(req.params.evento_documento));
 });
 
 
 app.delete('/eventos_documentos/:codigo_evento_documento', function (req, res) {
     eventos_documentos = requireUncached('./controllers/eventos_documentos.js');
-    eventos_documentos.deleteDocumento(req, res, req.params.codigo_evento_documento);
+    eventos_documentos.deleteDocumentoEvento(req, res, req.params.codigo_evento_documento);
 });
 
 app.get('/encuestas_usuarios/encuesta/:codigo_encuesta', function (req, res) {
