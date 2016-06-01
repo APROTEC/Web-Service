@@ -112,7 +112,7 @@ exports.borrarMiembroDeGrupo = function (req, resp, codigo_grupo, codigo_usuario
 
 exports.extraerInformacionGrupo = function (req, resp, codigo_grupo) {
     var sqlStatement = "select u.codigo_usuario, " +
-                        "p.codigo_informacion_persona, p.nombre, p.apellidos, p.fecha_nacimiento, " +
+                        "p.codigo_informacion_persona,p.foto, p.nombre, p.apellidos, p.fecha_nacimiento, " +
                         "p.correo_personal, p.codigo_talla_camisa, p.cargo_jefatura, " +
                         "p.vegetariano,p.codigo_sede,p.codigo_canton,p.codigo_sub_departamento,p.cedula," +
                         "p.correo_institucional,p.telefono_trabajo,p.numero_extension " +

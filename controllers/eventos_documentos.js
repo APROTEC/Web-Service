@@ -75,7 +75,7 @@ getDocumentId = function (req, res) {
 };
 
 
-insertDocumentoEvento = function (req, res, documento) {
+insertDocument = function (req, res, documento) {
     var sqlStatement = "insert into eventos_documentos (codigo_evento,nombre_documento,link_documento)" +
                         "values('" + documento.codigo_evento+"','" + documento.nombre_documento + "','sin enlace')";
     db.executeSql(sqlStatement, function (data, err) {

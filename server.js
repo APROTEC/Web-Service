@@ -57,7 +57,7 @@ app.post('/eventos_documentos/:evento_documento', function (req, res) {
 
 app.delete('/eventos_documentos/:codigo_evento_documento', function (req, res) {
     eventos_documentos = requireUncached('./controllers/eventos_documentos.js');
-    eventos_documentos.deleteDocumentoEvento(req, res, req.params.codigo_evento_documento);
+    eventos_documentos.deleteDocumento(req, res, req.params.codigo_evento_documento);
 });
 
 app.get('/encuestas_usuarios/encuesta/:codigo_encuesta', function (req, res) {
