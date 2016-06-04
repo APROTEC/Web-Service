@@ -4,10 +4,11 @@ var queryReturn = require("./queryReturn.js")
 
 
 exports.getAllGrupos = function (req, resp) {
-    var sqlStatement =  "select g.*,COUNT(g.codigo_grupo) as cantidad_miembros "+
-                        "from grupos g,miembros_grupo mg "+
-                        "where g.codigo_grupo = mg.codigo_grupo "+
-                        "group by g.codigo_grupo,g.descripcion_grupo";
+    var sqlStatement =  "select g.*,COUNT(mg.codigo_grupo) as cantidad_miembros "+
+						"from grupos g "+
+						"LEFT JOIN miembros_grupo mg "+
+						"ON g.codigo_grupo = mg.codigo_grupo "+
+						"group by g.codigo_grupo,g.descripcion_grupo ";
     db.executeSql(sqlStatement, function (data, err) {
         if (err) {
             error.displayError(err, resp);
