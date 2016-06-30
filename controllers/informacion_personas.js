@@ -72,7 +72,7 @@ exports.getPersonInformation = function (req,resp,codigo_informacion_persona) {
 };
 
 exports.insertNewPerson = function (req, resp,user) {
-    var sqlStatement = "insert into informacion_personas (codigo_informacion_persona,nombre,apellidos,correo_personal,cedula,foto) values (ident_current('usuarios')+1,'"+user.nombre+"','"+user.apellidos+"','"+user.nombre_usuario+"','" + user.cedula + "','aprotecstorage.blob.core.windows.net/photos/f3.png')";
+    var sqlStatement = "insert into informacion_personas (codigo_informacion_persona,nombre,apellidos,correo_personal,cedula,foto) values (ident_current('usuarios')+1,'"+user.nombre+"','"+user.apellidos+"','"+user.nombre_usuario+"','" + user.cedula + "','aprotecmedia.blob.core.windows.net/photos/f3.png')";
     db.executeSql(sqlStatement, function (data, err) {
         if (err) {
             error.displayError(err, resp);

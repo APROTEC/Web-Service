@@ -1,7 +1,7 @@
 ﻿var multer = require('multer');
 var azure = require('azure-storage');
-var accessKey = 'nyiXx2ANiQJ/fzBbq3DEozU3PRnDXbWFe03jtvAehq8dzIkFJZTHXZ3bjGTZNQO2WEVuyZ1/G8+7yUMG7e9IDg==';
-var storageAccount = 'aprotec';
+var accessKey = 'oPw8u467sDlAUVXfimoazOMOqGHVfsxJfj1ZtkcxCWvJ/iBHZhvJp9bMKK73TOaFCurC37eUltbRgVluH7XhCg==';
+var storageAccount = 'aprotecmedia';
 var containerName = 'photos';
 var error = require('./error.js');
 var queryReturn = require('./queryReturn.js');
@@ -33,7 +33,7 @@ var upload = multer({
 
 
 updatePersonInformation = function (codigo_informacion_persona) {
-    var sqlStatement = "update informacion_personas set foto = 'aprotec.blob.core.windows.net/photos/" + codigo_informacion_persona + "' where codigo_informacion_persona = " + codigo_informacion_persona;
+    var sqlStatement = "update informacion_personas set foto = 'aprotecmedia.blob.core.windows.net/photos/" + codigo_informacion_persona + "' where codigo_informacion_persona = " + codigo_informacion_persona;
     db.executeSql(sqlStatement, function (data, err) {
         fs.unlinkSync('.//uploads//' + fileName);
       

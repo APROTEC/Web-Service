@@ -1,7 +1,7 @@
 ﻿var multer = require('multer');
 var azure = require('azure-storage');
-var accessKey = 'nyiXx2ANiQJ/fzBbq3DEozU3PRnDXbWFe03jtvAehq8dzIkFJZTHXZ3bjGTZNQO2WEVuyZ1/G8+7yUMG7e9IDg==';
-var storageAccount = 'aprotec';
+var accessKey = 'oPw8u467sDlAUVXfimoazOMOqGHVfsxJfj1ZtkcxCWvJ/iBHZhvJp9bMKK73TOaFCurC37eUltbRgVluH7XhCg==';
+var storageAccount = 'aprotecmedia';
 var containerName = 'documentos-eventos';
 var error = require('./error.js');
 var queryReturn = require('./queryReturn.js');
@@ -34,7 +34,7 @@ var upload = multer({
 
 
 updateDocument = function () {
-    var sqlStatement = "update eventos_documentos set link_documento = 'aprotec.blob.core.windows.net/documentos-eventos/" + fileName + "' where codigo_evento_documento = " + documentId;
+    var sqlStatement = "update eventos_documentos set link_documento = 'aprotecmedia.blob.core.windows.net/documentos-eventos/" + fileName + "' where codigo_evento_documento = " + documentId;
     db.executeSql(sqlStatement, function (data, err) {
         fs.unlinkSync('.//uploads//' + fileName);
       
