@@ -36,7 +36,10 @@ exports.updateInformation = function (req, resp, info_data) {
                         ",correo_institucional = '" + info_data.correo_institucional + "' " +
                         ",telefono_trabajo = '" + info_data.telefono_trabajo + "' " +
                         ",numero_extension = '" + info_data.numero_extension + "' " +
-                        "where codigo_informacion_persona = " + info_data.codigo_informacion_persona + " ";
+                        "where codigo_informacion_persona = " + info_data.codigo_informacion_persona + "; "+
+
+                        "update usuarios set codigo_tipo_usuario = '"+info_data.codigo_tipo_usuario+"' "+
+                        "where codigo_informacion_persona = " info_data.codigo_informacion_persona+" ";
     db.executeSql(sqlStatement, function (data, err) {
         if (err) {
             error.displayError(err, resp);
@@ -56,9 +59,10 @@ exports.getPersonInformation = function (req,resp,codigo_informacion_persona) {
     var sqlStatement = "select nombre,foto,apellidos,fecha_nacimiento, " +
                         "correo_personal, codigo_talla_camisa, cargo_jefatura, " +
                         "vegetariano,codigo_sede,codigo_canton,codigo_sub_departamento,cedula," +
-                        "correo_institucional,telefono_trabajo,numero_extension " +
-                        "from informacion_personas " +
-                        "where codigo_informacion_persona =" + codigo_informacion_persona;
+                        "correo_institucional,telefono_trabajo,numero_extension,codigo_tipo_usuario " +
+                        "from informacion_personas,usuarios " +
+                        "where informacion_personas.codigo_informacion_persona =" + codigo_informacion_persona+
+                        " and usuarios.codigo_informacion_persona = informacion_personas.codigo_informacion_persona";
     db.executeSql(sqlStatement, function (data, err) {
         if (err) {
             error.displayError(err, resp);
