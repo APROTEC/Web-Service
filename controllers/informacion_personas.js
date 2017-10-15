@@ -39,7 +39,7 @@ exports.updateInformation = function (req, resp, info_data) {
                         "where codigo_informacion_persona = " + info_data.codigo_informacion_persona + "; "+
 
                         "update usuarios set codigo_tipo_usuario = '"+info_data.codigo_tipo_usuario+"' "+
-                        "where codigo_informacion_persona = " info_data.codigo_informacion_persona+" ";
+                        "where codigo_informacion_persona = "+ info_data.codigo_informacion_persona+" ";
     db.executeSql(sqlStatement, function (data, err) {
         if (err) {
             error.displayError(err, resp);
