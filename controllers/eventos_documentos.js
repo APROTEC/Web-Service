@@ -24,7 +24,7 @@ updateDocument = function () {
 
 loadDocumentAzure = function (req, resp) {
     var blobService = azure.createBlobService(storageAccount, accessKey);
-    var filePath = __dirname+'\\..\\uploads\\'+fileName;
+    var filePath = __dirname+'/../uploads/'+fileName;
     //console.log(filePath);
     blobService.createAppendBlobFromLocalFile(containerName, fileName,filePath , function (err, result, response) {
         if(err)
