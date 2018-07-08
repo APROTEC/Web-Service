@@ -50,6 +50,7 @@ getDocumentId = function (req, res) {
         else {
             documentId = data[0].id;
             queryReturn.displayDataSet(data, res);
+        }
     });
 
 };
