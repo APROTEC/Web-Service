@@ -85,7 +85,7 @@ insertDocumento = function (req, res, documento) {
             error.displayError(err, res);
         }
         else {
-      
+            this.loadDocumentAzure(req,res);
             this.getDocumentId(req,res);
         }
     });
