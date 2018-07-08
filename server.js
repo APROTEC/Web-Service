@@ -3,6 +3,26 @@ var port = process.env.port || 1337;
 
 var express = require('express');
 var app = express();
+var multer = require('multer');
+var fileName = '';
+var storage = multer.diskStorage({
+ //multers disk storage settings
+    destination: function (req, file, cb) {
+        cb(null, './uploads/');
+    },
+    filename: function (req, file, cb) {
+        var datetimestamp = Date.now();
+        fileName = datetimestamp+"-"+file.originalname;
+        cb(null, fileName);
+        
+    }
+});
+
+var upload = multer({
+ //multer settings
+    storage: storage
+});
+
 
 var usuarios = require('./controllers/usuarios');
 var grados_academicos = require('./controllers/grados_academicos')
@@ -49,9 +69,11 @@ app.get('/eventos_documentos/:codigo_evento', function (req, res) {
     eventos_documentos.getAllDocumentsFromEvents(req, res, req.params.codigo_evento);
 });
 
-app.post('/eventos_documentos/:evento_documento', function (req, res) {
+app.post('/eventos_documentos/:evento_documento', upload.single('file'),function (req, res) {
     eventos_documentos = requireUncached('./controllers/eventos_documentos.js');
-    eventos_documentos.insertDocumentoEvento(req, res, JSON.parse(req.params.evento_documento));
+    evento_documento = JSON.parse(req.params.evento_documento);
+    evento_documento.fileName = fileName;
+    eventos_documentos.insertDocumentoEvento(req, res, evento_documento);
 });
 
 
@@ -160,9 +182,11 @@ app.delete('/actas_usuarios/:codigo_acta-:codigo_usuario', function (req, res) {
 });
 
 
-app.post('/actas/:acta', function (req, res) {
+app.post('/actas/:acta',upload.single('file'), function (req, res) {
     documentos = requireUncached('./controllers/documentos.js');
-    documentos.loadDocument(req, res, JSON.parse(req.params.acta));
+    acta = JSON.parse(req.params.acta);
+    acta.fileName = fileName;
+    documentos.loadDocument(req, res,acta);
     
 });
 

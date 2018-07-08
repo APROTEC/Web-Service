@@ -9,28 +9,8 @@ var db = require("../core/db");
 var error = require("./error");
 var queryReturn = require("./queryReturn.js")
 var fs = require('fs');
-
-
+const path = require('path');
 var fileName = '';
-var documentId = 0;
-var storage = multer.diskStorage({
-    //multers disk storage settings
-    destination: function (req, file, cb) {
-        cb(null, './uploads/');
-    },
-    filename: function (req, file, cb) {
-        var datetimestamp = Date.now();
-        fileName = documentId + "-" + file.originalname;
-        cb(null, fileName);
-        
-    }
-});
-
-var upload = multer({
-    //multer settings
-    storage: storage
-}).single('file');
-
 
 
 updateDocument = function () {
@@ -44,8 +24,16 @@ updateDocument = function () {
 
 loadDocumentAzure = function (req, resp) {
     var blobService = azure.createBlobService(storageAccount, accessKey);
-    blobService.createAppendBlobFromLocalFile(containerName, fileName, './/uploads//' + fileName, function (err, result, response) {
-        
+    var filePath = __dirname+'\\..\\uploads\\'+fileName;
+    //console.log(filePath);
+    blobService.createAppendBlobFromLocalFile(containerName, fileName,filePath , function (err, result, response) {
+        if(err)
+        {
+            //console.log(err);
+        }
+        if(result){
+            //console.log(result);
+        }
         updateDocument();
         
     });
@@ -61,15 +49,7 @@ getDocumentId = function (req, res) {
         }
         else {
             documentId = data[0].id;
-            upload(req, res, function (err) {
-                if (err) {
-                    res.json({ error_code: 1, err_desc: err });
-                    return;
-                }
-                res.json({ error_code: 0, err_desc: null });
-                loadDocumentAzure(req, res);
-            });
-        }
+            queryReturn.displayDataSet(data, res);
     });
 
 };
@@ -83,7 +63,9 @@ insertDocument = function (req, res, documento) {
             error.displayError(err, resp);
         }
         else {
-            getDocumentId(req, res);
+            fileName = documento.fileName;
+            this.loadDocumentAzure(req,res);
+            this.getDocumentId(req,res);
         }
     });
 
