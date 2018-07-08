@@ -183,6 +183,11 @@ app.delete('/actas_usuarios/:codigo_acta-:codigo_usuario', function (req, res) {
 
 
 app.post('/actas/:acta',upload.single('file'), function (req, res) {
+    upload(req, res, function (err) {
+        if (err) {
+          console.log(err);
+        }
+    })
     documentos = requireUncached('./controllers/documentos.js');
     acta = JSON.parse(req.params.acta);
     acta.fileName = fileName;
