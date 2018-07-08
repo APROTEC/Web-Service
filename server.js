@@ -8,7 +8,7 @@ var fileName = '';
 var storage = multer.diskStorage({
  //multers disk storage settings
     destination: function (req, file, cb) {
-        cb(null, './uploads');
+        cb(null, __dirname+'/uploads');
     },
     filename: function (req, file, cb) {
         var datetimestamp = Date.now();
