@@ -16,7 +16,7 @@ var fileName = '';
 updateDocument = function () {
     var sqlStatement = "update eventos_documentos set link_documento = 'aprotecmedia.blob.core.windows.net/documentos-eventos/" + fileName + "' where codigo_evento_documento = " + documentId;
     db.executeSql(sqlStatement, function (data, err) {
-        fs.unlinkSync('../uploads/' + fileName);
+       // fs.unlinkSync('../uploads/' + fileName);
       
     });
 };
