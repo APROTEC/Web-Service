@@ -17,6 +17,7 @@ updateDocument = function () {
     var sqlStatement = "update eventos_documentos set link_documento = 'aprotecmedia.blob.core.windows.net/documentos-eventos/" + fileName + "' where codigo_evento_documento = " + documentId;
     db.executeSql(sqlStatement, function (data, err) {
        // fs.unlinkSync('../uploads/' + fileName);
+       console.log('Update Done');
       
     });
 };
@@ -49,6 +50,7 @@ getDocumentId = function (req, res) {
         }
         else {
             documentId = data[0].id;
+            this.loadDocumentAzure(req,res);
             queryReturn.displayDataSet(data, res);
         }
     });
@@ -65,7 +67,6 @@ insertDocument = function (req, res, documento) {
         }
         else {
             fileName = documento.fileName;
-            this.loadDocumentAzure(req,res);
             this.getDocumentId(req,res);
         }
     });

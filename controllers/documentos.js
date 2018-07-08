@@ -20,7 +20,9 @@ var documentId = 0;
 updateDocument = function () {
     var sqlStatement = "update actas set link_acta = 'aprotecmedia.blob.core.windows.net/documentos/" + fileName + "' where codigo_acta = " + documentId;
     db.executeSql(sqlStatement, function (data, err) {
+        console.log("Update done")
         //fs.unlinkSync('../uploads/' + fileName);
+
       
     });
 };
@@ -54,6 +56,7 @@ getDocumentId = function (req, res) {
         }
         else {
             documentId = data[0].id;
+            this.loadDocumentAzure(req,res);
             queryReturn.displayDataSet(data, res);
 
         }
@@ -74,7 +77,6 @@ insertDocumento = function (req, res, documento) {
         }
         else {
             fileName = documento.fileName;
-            this.loadDocumentAzure(req,res);
             this.getDocumentId(req,res);
         }
     });
