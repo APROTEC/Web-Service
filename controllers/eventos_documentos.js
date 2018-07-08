@@ -10,7 +10,7 @@ var error = require("./error");
 var queryReturn = require("./queryReturn.js")
 var fs = require('fs');
 const path = require('path');
-var fileName = '';
+
 
 
 updateDocument = function () {

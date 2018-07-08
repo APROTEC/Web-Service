@@ -11,12 +11,6 @@ const path = require('path');
 
 
 
-var fileName = '';
-var documentId = 0;
-
-
-
-
 updateDocument = function () {
     var sqlStatement = "update actas set link_acta = 'aprotecmedia.blob.core.windows.net/documentos/" + fileName + "' where codigo_acta = " + documentId;
     db.executeSql(sqlStatement, function (data, err) {
